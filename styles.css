@@ -597,6 +597,24 @@ p {
     transform: translateX(5px);
 }
 
+/* Clickable contact items */
+.contact-item.clickable {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.contact-item.clickable:hover {
+    border-color: var(--accent-primary);
+    transform: translateX(5px);
+    box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.contact-item.clickable:active {
+    transform: translateX(3px) scale(0.98);
+}
+
 .contact-item i {
     font-size: 1.5rem;
     color: var(--accent-primary);

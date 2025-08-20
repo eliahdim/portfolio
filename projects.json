@@ -6,9 +6,9 @@
       "description": "A responsive portfolio website built with HTML, CSS, and JavaScript, featuring modern design and smooth animations.",
       "icon": "fas fa-project-diagram",
       "technologies": ["HTML", "CSS", "JavaScript"],
-      "githubUrl": "#",
+      "githubUrl": "https://github.com/eliahdim/portfolio",
       "demoUrl": "#",
-      "imageUrl": null
+      "imageUrl": "images/portfolio.png"
     },
     {
       "id": 2,
@@ -16,29 +16,19 @@
       "description": "My exam work from Highschool. A 2D platformer game made in Unity with focus on optimizing the game's performance.",
       "icon": "fa-solid fa-gamepad",
       "technologies": ["C#", "Unity"],
-      "githubUrl": "#",
+      "githubUrl": "https://github.com/eliahdim/GA_Game",
       "demoUrl": "#",
-      "imageUrl": null
+      "imageUrl": "images/ga.png"
     },
     {
       "id": 3,
-      "title": "Database Management",
-      "description": "A database management system for organizing and querying data efficiently.",
-      "icon": "fas fa-database",
-      "technologies": ["SQL", "C#"],
-      "githubUrl": "#",
-      "demoUrl": "#",
-      "imageUrl": null
-    },
-    {
-      "id": 4,
-      "title": "Simple Game",
-      "description": "An interactive browser-based game demonstrating JavaScript game development concepts.",
-      "icon": "fas fa-gamepad",
+      "title": "The Weekdle",
+      "description": "A simple song guessing game about The Weeknd.",
+      "icon": "fa-solid fa-music",
       "technologies": ["HTML", "CSS", "JavaScript"],
-      "githubUrl": "#",
+      "githubUrl": "https://github.com/eliahdim/The_Weekdle",
       "demoUrl": "#",
-      "imageUrl": null
+      "imageUrl": "images/theWeekdle.png"
     }
   ]
 }
