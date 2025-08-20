@@ -108,13 +108,22 @@ Modify `styles.css` variables in `:root`:
 ```
 
 ### Adding Projects
-1. **Duplicate** an existing project card in `index.html`
-2. **Update** the content:
-   - Project title
-   - Description
-   - Technology tags
-   - GitHub and demo links
-3. **Change** the icon by modifying the FontAwesome class
+1. **Edit** the `projects.json` file to add new projects
+2. **Use this structure** for each project:
+   ```json
+   {
+     "id": 5,
+     "title": "Your Project Name",
+     "description": "A brief description of your project",
+     "icon": "fas fa-icon-name",
+     "technologies": ["Tech1", "Tech2", "Tech3"],
+     "githubUrl": "https://github.com/username/repo",
+     "demoUrl": "https://your-demo-url.com",
+     "imageUrl": "path/to/image.jpg" // Optional: leave as null to use icon
+   }
+   ```
+3. **Available icon options**: Use any FontAwesome icon class (e.g., `fas fa-code`, `fas fa-mobile-alt`, `fas fa-rocket`)
+4. **Save the file**: Projects will automatically reload when you refresh the page
 
 ### Adding Skills
 1. **Find** the skills grid in `index.html`
@@ -136,6 +145,7 @@ portfolio/
 ├── index.html          # Main HTML structure
 ├── styles.css          # CSS styling and animations
 ├── script.js           # JavaScript functionality
+├── projects.json       # Project data (easy to edit)
 └── README.md           # This file
 ```
 

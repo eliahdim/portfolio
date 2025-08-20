@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     initScrollAnimations();
     initActiveNavigation();
+    loadProjects(); // Load projects from JSON
 });
 
 // Mobile Menu Toggle
@@ -331,6 +332,184 @@ function debounce(func, wait) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
     };
+}
+
+// Load Projects from JSON
+async function loadProjects() {
+    try {
+        const response = await fetch('projects.json');
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        renderProjects(data.projects);
+    } catch (error) {
+        console.error('Error loading projects:', error);
+        // Fallback to default projects if JSON fails to load
+        renderProjects(getDefaultProjects());
+    }
+}
+
+// Render projects to the DOM
+function renderProjects(projects) {
+    const projectsGrid = document.querySelector('.projects-grid');
+    if (!projectsGrid) return;
+
+    projectsGrid.innerHTML = ''; // Clear existing content
+
+    projects.forEach(project => {
+        const projectCard = createProjectCard(project);
+        projectsGrid.appendChild(projectCard);
+    });
+
+    // Re-initialize scroll animations for new project cards
+    initScrollAnimations();
+}
+
+// Create a single project card element
+function createProjectCard(project) {
+    const projectCard = document.createElement('div');
+    projectCard.className = 'project-card';
+    
+    // Create project image section
+    const projectImage = document.createElement('div');
+    projectImage.className = 'project-image';
+    
+    if (project.imageUrl) {
+        // If there's an image URL, use an img tag
+        const img = document.createElement('img');
+        img.src = project.imageUrl;
+        img.alt = project.title;
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        projectImage.appendChild(img);
+    } else {
+        // Otherwise, use the icon
+        const icon = document.createElement('i');
+        icon.className = project.icon;
+        projectImage.appendChild(icon);
+    }
+
+    // Create project content section
+    const projectContent = document.createElement('div');
+    projectContent.className = 'project-content';
+    
+    // Project title
+    const projectTitle = document.createElement('h3');
+    projectTitle.className = 'project-title';
+    projectTitle.textContent = project.title;
+    
+    // Project description
+    const projectDescription = document.createElement('p');
+    projectDescription.className = 'project-description';
+    projectDescription.textContent = project.description;
+    
+    // Technology tags
+    const projectTech = document.createElement('div');
+    projectTech.className = 'project-tech';
+    project.technologies.forEach(tech => {
+        const techTag = document.createElement('span');
+        techTag.className = 'tech-tag';
+        techTag.textContent = tech;
+        projectTech.appendChild(techTag);
+    });
+    
+    // Project buttons
+    const projectButtons = document.createElement('div');
+    projectButtons.className = 'project-buttons';
+    
+    if (project.githubUrl && project.githubUrl !== '#') {
+        const githubBtn = document.createElement('a');
+        githubBtn.href = project.githubUrl;
+        githubBtn.className = 'btn btn-small';
+        githubBtn.textContent = 'View on GitHub';
+        githubBtn.target = '_blank';
+        githubBtn.rel = 'noopener noreferrer';
+        projectButtons.appendChild(githubBtn);
+    }
+    
+    if (project.demoUrl && project.demoUrl !== '#') {
+        const demoBtn = document.createElement('a');
+        demoBtn.href = project.demoUrl;
+        demoBtn.className = 'btn btn-small btn-outline';
+        demoBtn.textContent = 'Live Demo';
+        demoBtn.target = '_blank';
+        demoBtn.rel = 'noopener noreferrer';
+        projectButtons.appendChild(demoBtn);
+    }
+    
+    // If no valid URLs, show placeholder buttons
+    if (projectButtons.children.length === 0) {
+        const placeholderGithub = document.createElement('a');
+        placeholderGithub.href = '#';
+        placeholderGithub.className = 'btn btn-small';
+        placeholderGithub.textContent = 'View on GitHub';
+        projectButtons.appendChild(placeholderGithub);
+        
+        const placeholderDemo = document.createElement('a');
+        placeholderDemo.href = '#';
+        placeholderDemo.className = 'btn btn-small btn-outline';
+        placeholderDemo.textContent = 'Live Demo';
+        projectButtons.appendChild(placeholderDemo);
+    }
+    
+    // Assemble the project card
+    projectContent.appendChild(projectTitle);
+    projectContent.appendChild(projectDescription);
+    projectContent.appendChild(projectTech);
+    projectContent.appendChild(projectButtons);
+    
+    projectCard.appendChild(projectImage);
+    projectCard.appendChild(projectContent);
+    
+    return projectCard;
+}
+
+// Fallback projects if JSON fails to load
+function getDefaultProjects() {
+    return [
+        {
+            id: 1,
+            title: "Portfolio Website",
+            description: "A responsive portfolio website built with HTML, CSS, and JavaScript, featuring modern design and smooth animations.",
+            icon: "fas fa-project-diagram",
+            technologies: ["HTML", "CSS", "JavaScript"],
+            githubUrl: "#",
+            demoUrl: "#",
+            imageUrl: null
+        },
+        {
+            id: 2,
+            title: "Calculator App",
+            description: "A functional calculator application with a clean interface and mathematical operations.",
+            icon: "fas fa-calculator",
+            technologies: ["C#", "WPF"],
+            githubUrl: "#",
+            demoUrl: "#",
+            imageUrl: null
+        },
+        {
+            id: 3,
+            title: "Database Management",
+            description: "A database management system for organizing and querying data efficiently.",
+            icon: "fas fa-database",
+            technologies: ["SQL", "C#"],
+            githubUrl: "#",
+            demoUrl: "#",
+            imageUrl: null
+        },
+        {
+            id: 4,
+            title: "Simple Game",
+            description: "An interactive browser-based game demonstrating JavaScript game development concepts.",
+            icon: "fas fa-gamepad",
+            technologies: ["HTML", "CSS", "JavaScript"],
+            githubUrl: "#",
+            demoUrl: "#",
+            imageUrl: null
+        }
+    ];
 }
 
 // Apply debouncing to scroll events

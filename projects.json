@@ -1,0 +1,44 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Portfolio Website",
+      "description": "A responsive portfolio website built with HTML, CSS, and JavaScript, featuring modern design and smooth animations.",
+      "icon": "fas fa-project-diagram",
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "githubUrl": "#",
+      "demoUrl": "#",
+      "imageUrl": null
+    },
+    {
+      "id": 2,
+      "title": "Exam Work",
+      "description": "My exam work from Highschool. A 2D platformer game made in Unity with focus on optimizing the game's performance.",
+      "icon": "fa-solid fa-gamepad",
+      "technologies": ["C#", "Unity"],
+      "githubUrl": "#",
+      "demoUrl": "#",
+      "imageUrl": null
+    },
+    {
+      "id": 3,
+      "title": "Database Management",
+      "description": "A database management system for organizing and querying data efficiently.",
+      "icon": "fas fa-database",
+      "technologies": ["SQL", "C#"],
+      "githubUrl": "#",
+      "demoUrl": "#",
+      "imageUrl": null
+    },
+    {
+      "id": 4,
+      "title": "Simple Game",
+      "description": "An interactive browser-based game demonstrating JavaScript game development concepts.",
+      "icon": "fas fa-gamepad",
+      "technologies": ["HTML", "CSS", "JavaScript"],
+      "githubUrl": "#",
+      "demoUrl": "#",
+      "imageUrl": null
+    }
+  ]
+}
