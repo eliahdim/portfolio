@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eliah Bäckström Dimmed - Portfolio</title>
+    <meta name="description" content="Eliah Bäckström Dimmed - Aspiring Software Developer from Sweden. Passionate about programming, problem-solving, and building digital experiences.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header class="header">
+        <nav class="nav">
+            <div class="nav-container">
+                <div class="nav-logo">
+                    <a href="#home">EBD</a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#about" class="nav-link">About Me</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="hero-name">Eliah Bäckström Dimmed</span>
+                    <span class="hero-role">Aspiring Software Developer</span>
+                </h1>
+                <p class="hero-tagline">
+                    Passionate about programming, problem-solving, and building digital experiences.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Projects</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-icon">
+                    <i class="fas fa-code"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <!-- Interactive Journey -->
+                <div class="journey-section">
+                    <h3 class="journey-title">My Journey</h3>
+                    <div class="journey-container">
+                        <div class="journey-stage active" data-stage="1">
+                            <div class="journey-image">
+                                <i class="fas fa-child"></i>
+                            </div>
+                            <div class="journey-text">
+                                <h4>Early Years</h4>
+                                <p>Growing up in Sweden, I discovered my fascination with technology and computers at a young age. The digital world always seemed like a magical place where anything was possible.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-stage" data-stage="2">
+                            <div class="journey-image">
+                                <i class="fas fa-laptop-code"></i>
+                            </div>
+                            <div class="journey-text">
+                                <h4>Teenage Years</h4>
+                                <p>As a teenager, I began exploring programming and coding, realizing that I could create my own digital experiences. This sparked my passion for software development.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="journey-stage" data-stage="3">
+                            <div class="journey-image">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <div class="journey-text">
+                                <h4>Present Day</h4>
+                                <p>Currently studying Technical fourth year (TE4) at NTI Helsingborg, I'm focused on honing my skills in programming, IT, and building meaningful digital solutions.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="journey-navigation">
+                        <button class="journey-btn active" data-stage="1">1</button>
+                        <button class="journey-btn" data-stage="2">2</button>
+                        <button class="journey-btn" data-stage="3">3</button>
+                    </div>
+                </div>
+
+                <!-- Skills Section -->
+                <div class="skills-section">
+                    <h3 class="skills-title">Skills & Technologies</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-css3-alt"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js-square"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-hashtag"></i>
+                            <span>C#</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>SQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Personal Info -->
+                <div class="personal-info">
+                    <div class="info-card">
+                        <h4>Location</h4>
+                        <p><i class="fas fa-map-marker-alt"></i> Sweden</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Languages</h4>
+                        <p><i class="fas fa-language"></i> Swedish, English</p>
+                    </div>
+                    <div class="info-card">
+                        <h4>Interests</h4>
+                        <p><i class="fas fa-heart"></i> Programming, IT, Music, Climbing</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">My Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Portfolio Website</h3>
+                        <p class="project-description">A responsive portfolio website built with HTML, CSS, and JavaScript, featuring modern design and smooth animations.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-small">View on GitHub</a>
+                            <a href="#" class="btn btn-small btn-outline">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Calculator App</h3>
+                        <p class="project-description">A functional calculator application with a clean interface and mathematical operations.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">C#</span>
+                            <span class="tech-tag">WPF</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-small">View on GitHub</a>
+                            <a href="#" class="btn btn-small btn-outline">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Database Management</h3>
+                        <p class="project-description">A database management system for organizing and querying data efficiently.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">SQL</span>
+                            <span class="tech-tag">C#</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-small">View on GitHub</a>
+                            <a href="#" class="btn btn-small btn-outline">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Simple Game</h3>
+                        <p class="project-description">An interactive browser-based game demonstrating JavaScript game development concepts.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                        <div class="project-buttons">
+                            <a href="#" class="btn btn-small">View on GitHub</a>
+                            <a href="#" class="btn btn-small btn-outline">Live Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>eliah.backstrom@example.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <div>
+                            <h4>LinkedIn</h4>
+                            <p>linkedin.com/in/eliah-backstrom</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h4>GitHub</h4>
+                            <p>github.com/eliah-backstrom</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Eliah Bäckström Dimmed. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
