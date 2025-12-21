@@ -1,0 +1,36 @@
+{
+    "skills": [
+        {
+            "name": "HTML5",
+            "icon": "fab fa-html5"
+        },
+        {
+            "name": "CSS3",
+            "icon": "fab fa-css3-alt"
+        },
+        {
+            "name": "JavaScript",
+            "icon": "fab fa-js-square"
+        },
+        {
+            "name": "C#",
+            "icon": "fa-brands fa-python"
+        },
+        {
+            "name": "Python",
+            "icon": "fas fa-hashtag"
+        },
+        {
+            "name": "GitHub",
+            "icon": "fab fa-github"
+        },
+        {
+            "name": "SQL",
+            "icon": "fas fa-database"
+        },
+        {
+            "name": "Unity",
+            "icon": "fab fa-unity"
+        }
+    ]
+}
