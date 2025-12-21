@@ -2,33 +2,46 @@
   "projects": [
     {
       "id": 1,
-      "title": "Portfolio Website",
-      "description": "A responsive portfolio website built with HTML, CSS, and JavaScript, featuring modern design and smooth animations.",
+      "title": "TrustScribe",
+      "description": "A locally driven AI-transcribing tool built for Skolverkets Innovationslabb.",
       "icon": "fas fa-project-diagram",
-      "technologies": ["HTML", "CSS", "JavaScript"],
-      "githubUrl": "https://github.com/eliahdim/portfolio",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python"
+      ],
+      "githubUrl": "https://github.com/CarlAxelson/Skolverket-transkribering",
       "demoUrl": "#",
-      "imageUrl": "images/portfolio.png"
+      "imageUrl": "images/trustscribe-image.jpg"
     },
     {
       "id": 2,
       "title": "Exam Work",
       "description": "My exam work from Highschool. A 2D platformer game made in Unity with focus on optimizing the game's performance.",
       "icon": "fa-solid fa-gamepad",
-      "technologies": ["C#", "Unity"],
+      "technologies": [
+        "C#",
+        "Unity"
+      ],
       "githubUrl": "https://github.com/eliahdim/GA_Game",
       "demoUrl": "#",
       "imageUrl": "images/ga.png"
     },
     {
       "id": 3,
-      "title": "The Weekdle",
-      "description": "A simple song guessing game about The Weeknd.",
-      "icon": "fa-solid fa-music",
-      "technologies": ["HTML", "CSS", "JavaScript"],
-      "githubUrl": "https://github.com/eliahdim/The_Weekdle",
+      "title": "Hypixel Skyblock Tracker",
+      "description": "A project built in school to track items in Hypixel Skyblock.",
+      "icon": "fa-solid fa-gamepad",
+      "technologies": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "React"
+      ],
+      "githubUrl": "https://github.com/IsakPetersson/React-API",
       "demoUrl": "#",
-      "imageUrl": "images/theWeekdle.png"
+      "imageUrl": "images/skyblocktracker.png"
     }
   ]
 }
