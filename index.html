@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eliah Dimmed</title>
     <meta name="description"
-        content="Eliah Bäckström Dimmed - Aspiring Software Developer from Sweden. Passionate about programming, problem-solving, and building digital experiences.">
+        content="Eliah Dimmed - Graduate Engineer Student (TE4) specializing in Software Design, Automation, and AI. Solution-oriented developer bridging software and infrastructure.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -45,18 +45,47 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
+        <canvas id="jungleCanvas" class="jungle-canvas"></canvas>
+        <div class="hero-canopy"></div>
+        <div class="scroll-indicator">
+            <span>Explore</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
         <div class="hero-container">
             <div class="hero-content">
+                <div class="hero-badge">Graduate Engineer Student (TE4)</div>
                 <h1 class="hero-title">
                     <span class="hero-name">Eliah Dimmed</span>
-                    <span class="hero-role">Aspiring Software Developer</span>
+                    <span class="hero-role">Software Design • Automation • AI</span>
                 </h1>
                 <p class="hero-tagline">
-                    Passionate about programming, problem-solving, and building digital experiences.
+                    Solution-oriented engineer bridging software development and IT infrastructure. Combining coding expertise with hands-on experience from the fiber optics industry.
                 </p>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" data-type="experience">0</span>
+                        <span class="stat-label">Years Experience</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-type="technologies">0</span>
+                        <span class="stat-label">Technologies</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" data-type="projects">0</span>
+                        <span class="stat-label">Public Projects</span>
+                    </div>
+                </div>
                 <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Projects</a>
-                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                    <a href="#projects" class="btn btn-primary">
+                        <span>Explore My Work</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <span>Get In Touch</span>
+                        <i class="fas fa-envelope"></i>
+                    </a>
                 </div>
             </div>
             <div class="hero-visual">
@@ -70,24 +99,18 @@
 
     <!-- About Me Section -->
     <section id="about" class="about">
+        <div class="about-bg"></div>
         <div class="container">
-            <h2 class="section-title">About Me</h2>
+            <div class="section-header">
+                <h2 class="section-title">About Me</h2>
+                <p class="section-subtitle">My journey through technology and growth</p>
+            </div>
             <div class="about-content">
-                <!-- Interactive Journey -->
+                <!-- Interactive Journey Timeline -->
                 <div class="journey-section">
                     <h3 class="journey-title">My Journey</h3>
-
-                    <div class="journey-container">
+                    <div class="journey-timeline">
                         <!-- Journey stages will be loaded dynamically from journey.json -->
-                    </div>
-
-                    <div class="journey-controls">
-                        <!-- Custom Slider with fill effect -->
-                        <div class="slider-container">
-                            <div class="slider-fill-bar"></div>
-                            <input type="range" min="0" max="100" value="0" class="journey-slider" id="journeySlider">
-                            <div class="journey-checkpoints"></div>
-                        </div>
                     </div>
                 </div>
 
@@ -99,19 +122,37 @@
                     </div>
                 </div>
 
+                <!-- Professional Summary -->
+                <div class="professional-summary">
+                    <h3 class="summary-title">Professional Profile</h3>
+                    <div class="summary-content">
+                        <p class="summary-text">
+                            Solution-oriented engineering student who bridges the gap between software development and physical IT infrastructure. Combines coding skills in Python and JavaScript with practical, hands-on experience from the fiber optics industry. Recognized for a "doer" mindset, being highly structured, and possessing a high capacity for learning new technologies quickly, particularly AI-driven automation.
+                        </p>
+                    </div>
+                </div>
+
                 <!-- Personal Info -->
                 <div class="personal-info">
                     <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <h4>Location</h4>
-                        <p><i class="fas fa-map-marker-alt"></i> Hässleholm, Sweden</p>
+                        <p>Tyringe, Sweden</p>
                     </div>
                     <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-language"></i></div>
                         <h4>Languages</h4>
-                        <p><i class="fas fa-language"></i> Swedish, English</p>
+                        <p>Swedish, English</p>
                     </div>
                     <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-heart"></i></div>
                         <h4>Interests</h4>
-                        <p><i class="fas fa-heart"></i> Football, Video games, IT</p>
+                        <p>Football, Video games, IT</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="info-icon"><i class="fas fa-phone"></i></div>
+                        <h4>Phone</h4>
+                        <p>070-867 15 87</p>
                     </div>
                 </div>
             </div>
@@ -120,18 +161,35 @@
 
     <!-- Projects Section -->
     <section id="projects" class="projects">
+        <div class="projects-bg"></div>
         <div class="container">
-            <h2 class="section-title">My Projects</h2>
+            <div class="section-header">
+                <h2 class="section-title">My Projects</h2>
+                <p class="section-subtitle">Exploring the digital jungle, one project at a time</p>
+            </div>
             <div class="projects-grid">
                 <!-- Projects will be loaded dynamically from projects.json -->
             </div>
         </div>
     </section>
 
+    <!-- Project Modal -->
+    <div id="projectModal" class="project-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
+            <div class="section-header">
+                <h2 class="section-title">Get In Touch</h2>
+            </div>
             <div class="contact-content">
                 <div class="contact-info">
                     <a href="mailto:eliah.dimmed@gmail.com" class="contact-item clickable">

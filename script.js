@@ -1,14 +1,21 @@
+// ============================================
+// JUNGLE THEMED PORTFOLIO - INTERACTIVE FEATURES
+// ============================================
+
 // DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function () {
-    // Initialize all functionality
     initMobileMenu();
-    initJourneyNavigation();
+    initJungleCanvas();
+    initJourneyTimeline();
     initSmoothScrolling();
     initContactForm();
     initScrollAnimations();
     initActiveNavigation();
-    loadProjects(); // Load projects from JSON
-    loadSkills(); // Load skills from JSON
+    initProjectModals();
+    initParallaxEffects();
+    loadProjects();
+    loadSkills();
+    initAnimatedStats(); // Call after loading projects and skills
 });
 
 // Mobile Menu Toggle
@@ -23,7 +30,6 @@ function initMobileMenu() {
             navMenu.classList.toggle('active');
         });
 
-        // Close mobile menu when clicking on a link
         navLinks.forEach(link => {
             link.addEventListener('click', function () {
                 navToggle.classList.remove('active');
@@ -31,7 +37,6 @@ function initMobileMenu() {
             });
         });
 
-        // Close mobile menu when clicking outside
         document.addEventListener('click', function (e) {
             if (!navToggle.contains(e.target) && !navMenu.contains(e.target)) {
                 navToggle.classList.remove('active');
@@ -41,212 +46,253 @@ function initMobileMenu() {
     }
 }
 
-// Interactive Journey Navigation (Slider)
-// Interactive Journey Navigation (Slider)
-// Interactive Journey Navigation (Slider)
-async function initJourneyNavigation() {
-    const container = document.querySelector('.journey-container');
-    const slider = document.querySelector('.journey-slider');
-    const checkpointsContainer = document.querySelector('.journey-checkpoints');
+// Jungle Canvas Animation (Falling Leaves/Particles)
+function initJungleCanvas() {
+    const canvas = document.getElementById('jungleCanvas');
+    if (!canvas) return;
 
-    if (!container || !slider) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
-    let snapPoints = [];
+    // Leaf particles
+    class Leaf {
+        constructor() {
+            this.reset();
+        }
 
-    // Helper to update slider visual (fill effect)
-    function updateSliderVisual(percentage) {
-        slider.style.setProperty('--progress', `${percentage}%`);
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = -20;
+            this.size = Math.random() * 8 + 4;
+            this.speed = Math.random() * 2 + 1;
+            this.angle = Math.random() * Math.PI * 2;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.1;
+            this.color = `rgba(${Math.random() > 0.5 ? '34, 197, 94' : '16, 185, 129'}, ${Math.random() * 0.3 + 0.2})`;
+        }
 
-        // Update active state of checkpoints
-        const checkpoints = document.querySelectorAll('.journey-checkpoint');
-        checkpoints.forEach(cp => {
-            const cpLeft = parseFloat(cp.style.left);
-            if (percentage >= cpLeft - 1) { // -1 tolerance
-                cp.classList.add('active');
-            } else {
-                cp.classList.remove('active');
+        update() {
+            this.y += this.speed;
+            this.x += Math.sin(this.angle) * 0.5;
+            this.angle += this.rotationSpeed;
+
+            if (this.y > canvas.height + 20) {
+                this.reset();
+            }
+        }
+
+        draw() {
+            ctx.save();
+            ctx.translate(this.x, this.y);
+            ctx.rotate(this.angle);
+            ctx.fillStyle = this.color;
+            ctx.beginPath();
+            ctx.ellipse(0, 0, this.size, this.size * 1.5, 0, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    const leaves = [];
+    for (let i = 0; i < 30; i++) {
+        leaves.push(new Leaf());
+        leaves[i].y = Math.random() * canvas.height;
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        leaves.forEach(leaf => {
+            leaf.update();
+            leaf.draw();
+        });
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+}
+
+// Animated Stats Counter
+async function initAnimatedStats() {
+    // Calculate years of experience from July 1, 2024
+    function calculateYearsExperience() {
+        const startDate = new Date('2024-07-01');
+        const now = new Date();
+        const diffTime = now - startDate;
+        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+        const diffMonths = diffDays / 30.44; // Average days per month
+        const years = diffMonths / 12;
+        
+        // Round to nearest 0.5
+        return Math.round(years * 2) / 2;
+    }
+
+    // Load technologies count from skills.json
+    async function getTechnologiesCount() {
+        try {
+            const response = await fetch('skills.json');
+            if (!response.ok) return 8; // Fallback
+            const data = await response.json();
+            return data.skills ? data.skills.length : 8;
+        } catch (error) {
+            console.error('Error loading skills:', error);
+            return 8; // Fallback
+        }
+    }
+
+    // Load projects count from projects.json
+    async function getProjectsCount() {
+        try {
+            const response = await fetch('projects.json');
+            if (!response.ok) return 0; // Fallback
+            const data = await response.json();
+            return data.projects ? data.projects.length : 0;
+        } catch (error) {
+            console.error('Error loading projects:', error);
+            return 0; // Fallback
+        }
+    }
+
+    // Get all stat elements
+    const experienceStat = document.querySelector('.stat-number[data-type="experience"]');
+    const technologiesStat = document.querySelector('.stat-number[data-type="technologies"]');
+    const projectsStat = document.querySelector('.stat-number[data-type="projects"]');
+
+    // Set targets
+    const yearsExperience = calculateYearsExperience();
+    const technologiesCount = await getTechnologiesCount();
+    const projectsCount = await getProjectsCount();
+
+    // Update data attributes if they exist
+    if (experienceStat) {
+        experienceStat.setAttribute('data-target', yearsExperience.toString());
+    }
+    if (technologiesStat) {
+        technologiesStat.setAttribute('data-target', technologiesCount.toString());
+    }
+    if (projectsStat) {
+        projectsStat.setAttribute('data-target', projectsCount.toString());
+    }
+
+    const stats = document.querySelectorAll('.stat-number');
+    const observerOptions = {
+        threshold: 0.5
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
+                entry.target.classList.add('counted');
+                const statType = entry.target.getAttribute('data-type');
+                let target;
+                
+                if (statType === 'experience') {
+                    target = yearsExperience;
+                } else if (statType === 'technologies') {
+                    target = technologiesCount;
+                } else if (statType === 'projects') {
+                    target = projectsCount;
+                } else {
+                    target = parseInt(entry.target.getAttribute('data-target')) || 0;
+                }
+
+                animateValue(entry.target, 0, target, 2000, statType === 'experience');
             }
         });
-    }
+    }, observerOptions);
 
-    // Function to calculate and update snap points based on content
-    function updateSnapPoints() {
-        if (!container) return;
+    stats.forEach(stat => {
+        observer.observe(stat);
+    });
+}
 
-        const stages = Array.from(container.querySelectorAll('.journey-stage'));
-        if (stages.length === 0) return;
-
-        snapPoints = [];
-        const containerWidth = container.clientWidth;
-        const scrollWidth = container.scrollWidth;
-        const maxScroll = scrollWidth - containerWidth;
-
-        // If content isn't scrollable, hide slider
-        if (maxScroll <= 0) {
-            slider.parentElement.style.display = 'none'; // Hide the whole container
-            return;
+function animateValue(element, start, end, duration, isDecimal = false) {
+    let startTimestamp = null;
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        
+        if (isDecimal) {
+            // For decimal values (years experience)
+            const current = start + (progress * (end - start));
+            element.textContent = current.toFixed(1);
         } else {
-            slider.parentElement.style.display = 'flex';
+            // For integer values
+            const current = Math.floor(progress * (end - start) + start);
+            element.textContent = current;
         }
-
-        // Calculate snap points
-        stages.forEach((stage, index) => {
-            // Center alignment logic based on offsetLeft
-            const stageLeft = stage.offsetLeft;
-            const stageWidth = stage.offsetWidth;
-
-            let targetScroll = stageLeft + (stageWidth / 2) - (containerWidth / 2);
-            targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
-
-            const percentage = (targetScroll / maxScroll) * 100;
-
-            snapPoints.push({
-                index: index,
-                scrollPos: targetScroll,
-                percentage: percentage
-            });
-        });
-
-        // Render checkpoints
-        if (checkpointsContainer) {
-            checkpointsContainer.innerHTML = '';
-            snapPoints.forEach(point => {
-                const checkpoint = document.createElement('div');
-                checkpoint.classList.add('journey-checkpoint');
-                checkpoint.style.left = `${point.percentage}%`;
-
-                // Add active class initially if at start
-                if (point.percentage === 0) checkpoint.classList.add('active');
-
-                checkpoint.addEventListener('click', () => {
-                    container.scrollTo({
-                        left: point.scrollPos,
-                        behavior: 'smooth'
-                    });
-                });
-
-                checkpointsContainer.appendChild(checkpoint);
-            });
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            element.textContent = isDecimal ? end.toFixed(1) : end;
         }
-    }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// Interactive Journey Timeline (Vertical Tree)
+async function initJourneyTimeline() {
+    const timelineContainer = document.querySelector('.journey-timeline');
+    if (!timelineContainer) return;
 
     try {
         const response = await fetch('journey.json');
         if (!response.ok) throw new Error('Failed to load journey data');
         const data = await response.json();
 
-        // Render journey stages
-        container.innerHTML = data.journey.map(stage => `
+        timelineContainer.innerHTML = data.journey.map((stage, index) => `
             <div class="journey-stage">
-                <div class="journey-content-box">
-                    <div class="journey-text-box">
-                        <h4>${stage.title}</h4>
-                        ${stage.meta ? `<p class="journey-meta">${stage.meta}</p>` : ''}
-                        <p>${stage.description}</p>
-                    </div>
-                    <div class="journey-image-box">
-                        ${stage.imageUrl
-                ? `<img src="${stage.imageUrl}" alt="${stage.title}" class="journey-img">`
-                : `<i class="${stage.icon}"></i>`
-            }
-                    </div>
+                <div class="journey-stage-marker"></div>
+                <div class="journey-icon">
+                    ${stage.imageUrl 
+                        ? `<img src="${stage.imageUrl}" alt="${stage.title}">`
+                        : `<i class="${stage.icon}"></i>`
+                    }
+                </div>
+                <div class="journey-stage-content">
+                    <h4>${stage.title}</h4>
+                    ${stage.meta ? `<p class="journey-meta">${stage.meta}</p>` : ''}
+                    <p>${stage.description}</p>
                 </div>
             </div>
         `).join('');
 
-        // Initial calculation
-        setTimeout(() => {
-            updateSnapPoints();
-            updateSliderVisual(0); // Init visual
-        }, 100);
-
-        // Resize listener
-        window.addEventListener('resize', () => {
-            updateSnapPoints();
-        });
-
-        // Slider Interaction (Input - Dragging)
-        slider.addEventListener('input', () => {
-            const scrollWidth = container.scrollWidth - container.clientWidth;
-            const scrollPos = (slider.value / 100) * scrollWidth;
-
-            // Instant scroll for responsiveness while dragging
-            container.scrollTo({
-                left: scrollPos,
-                behavior: 'auto'
-            });
-
-            updateSliderVisual(slider.value);
-        });
-
-        // Flag to prevent scroll listener from fighting with snap animation
-        let isSnapping = false;
-
-        // Slider Interaction (Change - Snapping only)
-        const snapToClosest = () => {
-            const currentVal = parseFloat(slider.value);
-
-            if (snapPoints.length > 0) {
-                const closest = snapPoints.reduce((prev, curr) => {
-                    return (Math.abs(curr.percentage - currentVal) < Math.abs(prev.percentage - currentVal) ? curr : prev);
-                });
-
-                isSnapping = true; // Prevent scroll listener from interfering
-                slider.blur(); // Remove focus
-
-                // Also update slider value directly to the snap point
-                slider.value = closest.percentage;
-                updateSliderVisual(closest.percentage);
-
-                container.scrollTo({
-                    left: closest.scrollPos,
-                    behavior: 'smooth'
-                });
-
-                // Reset flag after animation completes
-                setTimeout(() => {
-                    isSnapping = false;
-                }, 500);
-            }
-        };
-
-        slider.addEventListener('change', snapToClosest);
-
-        // Also snap on mouseup (for when user clicks on track between checkpoints)
-        // Use a small timeout to allow the slider value to update first
-        slider.addEventListener('mouseup', () => {
-            setTimeout(snapToClosest, 50);
-        });
-
-        // Scroll Sync (Container -> Slider)
-        container.addEventListener('scroll', () => {
-            // Don't update if snapping or if slider is being dragged
-            if (!isSnapping && document.activeElement !== slider) {
-                const scrollWidth = container.scrollWidth - container.clientWidth;
-                if (scrollWidth > 0) {
-                    const scrollPercentage = (container.scrollLeft / scrollWidth) * 100;
-                    slider.value = scrollPercentage;
-                    updateSliderVisual(scrollPercentage);
+        // Animate stages on scroll
+        const stages = document.querySelectorAll('.journey-stage');
+        const stageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
                 }
-            }
+            });
+        }, { threshold: 0.2 });
+
+        stages.forEach(stage => {
+            stageObserver.observe(stage);
         });
 
     } catch (error) {
         console.error('Error loading journey:', error);
-        container.innerHTML = '<p style="text-align:center; padding: 2rem;">Failed to load journey data.</p>';
+        timelineContainer.innerHTML = '<p style="text-align:center; padding: 2rem; color: var(--text-secondary);">Failed to load journey data.</p>';
     }
 }
 
-// Smooth Scrolling for Navigation Links
+// Smooth Scrolling
 function initSmoothScrolling() {
     const navLinks = document.querySelectorAll('a[href^="#"]');
 
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
-            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href === '#') return;
 
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            e.preventDefault();
+            const targetSection = document.querySelector(href);
 
             if (targetSection) {
                 const headerHeight = document.querySelector('.header').offsetHeight;
@@ -261,7 +307,7 @@ function initSmoothScrolling() {
     });
 }
 
-// Contact Form Handling
+// Contact Form
 function initContactForm() {
     const contactForm = document.querySelector('.contact-form');
 
@@ -269,13 +315,11 @@ function initContactForm() {
         contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Get form data
             const formData = new FormData(this);
             const name = formData.get('name');
             const email = formData.get('email');
             const message = formData.get('message');
 
-            // Basic validation
             if (!name || !email || !message) {
                 showNotification('Please fill in all fields.', 'error');
                 return;
@@ -286,28 +330,21 @@ function initContactForm() {
                 return;
             }
 
-            // Simulate form submission (replace with actual form handling)
             showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-
-            // Reset form
             this.reset();
         });
     }
 }
 
-// Email validation helper
 function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(email);
 }
 
-// Notification system
 function showNotification(message, type = 'info') {
-    // Remove existing notifications
     const existingNotifications = document.querySelectorAll('.notification');
     existingNotifications.forEach(notification => notification.remove());
 
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -317,13 +354,18 @@ function showNotification(message, type = 'info') {
         </div>
     `;
 
-    // Add styles
+    const colors = {
+        success: '#22c55e',
+        error: '#ef4444',
+        info: '#3b82f6'
+    };
+
     notification.style.cssText = `
         position: fixed;
         top: 100px;
         right: 20px;
-        background: ${type === 'success' ? '#00ff88' : type === 'error' ? '#ff4444' : '#00aaff'};
-        color: #000;
+        background: ${colors[type] || colors.info};
+        color: #fff;
         padding: 15px 20px;
         border-radius: 8px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
@@ -333,22 +375,18 @@ function showNotification(message, type = 'info') {
         max-width: 300px;
     `;
 
-    // Add to page
     document.body.appendChild(notification);
 
-    // Animate in
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
 
-    // Close button functionality
     const closeBtn = notification.querySelector('.notification-close');
     closeBtn.addEventListener('click', () => {
         notification.style.transform = 'translateX(400px)';
         setTimeout(() => notification.remove(), 300);
     });
 
-    // Auto-remove after 5 seconds
     setTimeout(() => {
         if (notification.parentNode) {
             notification.style.transform = 'translateX(400px)';
@@ -367,29 +405,24 @@ function initScrollAnimations() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    // Observe elements for animation
     const animatedElements = document.querySelectorAll('.project-card, .skill-item, .info-card, .contact-item');
     animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
 }
 
-// Active Navigation Highlighting
+// Active Navigation
 function initActiveNavigation() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
 
     function updateActiveNav() {
-        const scrollPos = window.scrollY + 100;
+        const scrollPos = window.scrollY + 150;
 
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -407,94 +440,57 @@ function initActiveNavigation() {
         });
     }
 
-    // Update on scroll
     window.addEventListener('scroll', updateActiveNav);
-
-    // Initial call
     updateActiveNav();
 }
 
-// Header scroll effect
+// Header Scroll Effect
 window.addEventListener('scroll', function () {
     const header = document.querySelector('.header');
     if (window.scrollY > 100) {
-        header.style.background = 'rgba(10, 10, 10, 0.98)';
-        header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.3)';
+        header.classList.add('scrolled');
     } else {
-        header.style.background = 'rgba(10, 10, 10, 0.95)';
-        header.style.boxShadow = 'none';
+        header.classList.remove('scrolled');
     }
 });
 
-// Typing effect for hero title (optional enhancement)
-function initTypingEffect() {
-    const heroName = document.querySelector('.hero-name');
-    if (heroName) {
-        const text = heroName.textContent;
-        heroName.textContent = '';
+// Project Modals
+function initProjectModals() {
+    const modal = document.getElementById('projectModal');
+    const modalOverlay = modal?.querySelector('.modal-overlay');
+    const modalClose = modal?.querySelector('.modal-close');
 
-        let i = 0;
-        const typeWriter = () => {
-            if (i < text.length) {
-                heroName.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        };
+    if (!modal) return;
 
-        // Start typing effect after a delay
-        setTimeout(typeWriter, 1000);
-    }
+    modalOverlay?.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    modalClose?.addEventListener('click', () => {
+        modal.classList.remove('active');
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            modal.classList.remove('active');
+        }
+    });
 }
 
-// Initialize typing effect
-setTimeout(initTypingEffect, 500);
+// Parallax Effects
+function initParallaxEffects() {
+    const parallaxElements = document.querySelectorAll('.hero-canopy, .about-bg, .projects-bg');
 
-// Add CSS for active navigation state
-const style = document.createElement('style');
-style.textContent = `
-    .nav-link.active {
-        color: var(--accent-primary) !important;
-    }
-    
-    .nav-link.active::after {
-        width: 100% !important;
-    }
-    
-    .notification-content {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 15px;
-    }
-    
-    .notification-close {
-        background: none;
-        border: none;
-        font-size: 20px;
-        cursor: pointer;
-        color: #000;
-        padding: 0;
-        line-height: 1;
-    }
-    
-    .notification-close:hover {
-        opacity: 0.7;
-    }
-`;
-document.head.appendChild(style);
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
 
-// Performance optimization: Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
+        parallaxElements.forEach(element => {
+            if (element) {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            }
+        });
+    });
 }
 
 // Load Projects from JSON
@@ -508,67 +504,54 @@ async function loadProjects() {
         renderProjects(data.projects);
     } catch (error) {
         console.error('Error loading projects:', error);
-        // Fallback to default projects if JSON fails to load
-        renderProjects(getDefaultProjects());
     }
 }
 
-// Render projects to the DOM
 function renderProjects(projects) {
     const projectsGrid = document.querySelector('.projects-grid');
     if (!projectsGrid) return;
 
-    projectsGrid.innerHTML = ''; // Clear existing content
+    projectsGrid.innerHTML = '';
 
     projects.forEach(project => {
         const projectCard = createProjectCard(project);
         projectsGrid.appendChild(projectCard);
     });
 
-    // Re-initialize scroll animations for new project cards
     initScrollAnimations();
+    attachProjectClickHandlers();
 }
 
-// Create a single project card element
 function createProjectCard(project) {
     const projectCard = document.createElement('div');
     projectCard.className = 'project-card';
+    projectCard.setAttribute('data-project-id', project.id);
 
-    // Create project image section
     const projectImage = document.createElement('div');
     projectImage.className = 'project-image';
 
     if (project.imageUrl) {
-        // If there's an image URL, use an img tag
         const img = document.createElement('img');
         img.src = project.imageUrl;
         img.alt = project.title;
-        img.style.width = '100%';
-        img.style.height = '100%';
-        img.style.objectFit = 'cover';
         projectImage.appendChild(img);
     } else {
-        // Otherwise, use the icon
         const icon = document.createElement('i');
         icon.className = project.icon;
         projectImage.appendChild(icon);
     }
 
-    // Create project content section
     const projectContent = document.createElement('div');
     projectContent.className = 'project-content';
 
-    // Project title
     const projectTitle = document.createElement('h3');
     projectTitle.className = 'project-title';
     projectTitle.textContent = project.title;
 
-    // Project description
     const projectDescription = document.createElement('p');
     projectDescription.className = 'project-description';
     projectDescription.textContent = project.description;
 
-    // Technology tags
     const projectTech = document.createElement('div');
     projectTech.className = 'project-tech';
     project.technologies.forEach(tech => {
@@ -578,15 +561,14 @@ function createProjectCard(project) {
         projectTech.appendChild(techTag);
     });
 
-    // Project buttons
     const projectButtons = document.createElement('div');
     projectButtons.className = 'project-buttons';
 
     if (project.githubUrl && project.githubUrl !== '#') {
         const githubBtn = document.createElement('a');
         githubBtn.href = project.githubUrl;
-        githubBtn.className = 'btn btn-small';
-        githubBtn.textContent = 'View on GitHub';
+        githubBtn.className = 'btn btn-small btn-secondary';
+        githubBtn.innerHTML = '<i class="fab fa-github"></i> GitHub';
         githubBtn.target = '_blank';
         githubBtn.rel = 'noopener noreferrer';
         projectButtons.appendChild(githubBtn);
@@ -595,29 +577,13 @@ function createProjectCard(project) {
     if (project.demoUrl && project.demoUrl !== '#') {
         const demoBtn = document.createElement('a');
         demoBtn.href = project.demoUrl;
-        demoBtn.className = 'btn btn-small btn-outline';
-        demoBtn.textContent = 'Live Demo';
+        demoBtn.className = 'btn btn-small btn-primary';
+        demoBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Live Demo';
         demoBtn.target = '_blank';
         demoBtn.rel = 'noopener noreferrer';
         projectButtons.appendChild(demoBtn);
     }
 
-    // If no valid URLs, show placeholder buttons
-    if (projectButtons.children.length === 0) {
-        const placeholderGithub = document.createElement('a');
-        placeholderGithub.href = '#';
-        placeholderGithub.className = 'btn btn-small';
-        placeholderGithub.textContent = 'View on GitHub';
-        projectButtons.appendChild(placeholderGithub);
-
-        const placeholderDemo = document.createElement('a');
-        placeholderDemo.href = '#';
-        placeholderDemo.className = 'btn btn-small btn-outline';
-        placeholderDemo.textContent = 'Live Demo';
-        projectButtons.appendChild(placeholderDemo);
-    }
-
-    // Assemble the project card
     projectContent.appendChild(projectTitle);
     projectContent.appendChild(projectDescription);
     projectContent.appendChild(projectTech);
@@ -629,58 +595,52 @@ function createProjectCard(project) {
     return projectCard;
 }
 
-// Fallback projects if JSON fails to load
-function getDefaultProjects() {
-    return [
-        {
-            id: 1,
-            title: "Portfolio Website",
-            description: "A responsive portfolio website built with HTML, CSS, and JavaScript, featuring modern design and smooth animations.",
-            icon: "fas fa-project-diagram",
-            technologies: ["HTML", "CSS", "JavaScript"],
-            githubUrl: "#",
-            demoUrl: "#",
-            imageUrl: null
-        },
-        {
-            id: 2,
-            title: "Calculator App",
-            description: "A functional calculator application with a clean interface and mathematical operations.",
-            icon: "fas fa-calculator",
-            technologies: ["C#", "WPF"],
-            githubUrl: "#",
-            demoUrl: "#",
-            imageUrl: null
-        },
-        {
-            id: 3,
-            title: "Database Management",
-            description: "A database management system for organizing and querying data efficiently.",
-            icon: "fas fa-database",
-            technologies: ["SQL", "C#"],
-            githubUrl: "#",
-            demoUrl: "#",
-            imageUrl: null
-        },
-        {
-            id: 4,
-            title: "Simple Game",
-            description: "An interactive browser-based game demonstrating JavaScript game development concepts.",
-            icon: "fas fa-gamepad",
-            technologies: ["HTML", "CSS", "JavaScript"],
-            githubUrl: "#",
-            demoUrl: "#",
-            imageUrl: null
-        }
-    ];
+function attachProjectClickHandlers() {
+    const projectCards = document.querySelectorAll('.project-card');
+    const modal = document.getElementById('projectModal');
+    const modalBody = modal?.querySelector('.modal-body');
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', async (e) => {
+            // Don't open modal if clicking on buttons
+            if (e.target.closest('.project-buttons')) return;
+
+            const projectId = card.getAttribute('data-project-id');
+            
+            try {
+                const response = await fetch('projects.json');
+                const data = await response.json();
+                const project = data.projects.find(p => p.id == projectId);
+                
+                if (project && modalBody) {
+                    modalBody.innerHTML = `
+                        <div style="margin-bottom: 2rem;">
+                            ${project.imageUrl ? `<img src="${project.imageUrl}" alt="${project.title}" style="width: 100%; border-radius: 0.75rem; margin-bottom: 1.5rem;">` : ''}
+                            <h2 style="font-size: 2.5rem; color: var(--accent-primary); margin-bottom: 1rem; font-family: var(--font-display);">${project.title}</h2>
+                            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">${project.description}</p>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 2rem;">
+                                ${project.technologies.map(tech => 
+                                    `<span style="background: rgba(34, 197, 94, 0.1); color: var(--accent-primary); padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid var(--border-glow);">${tech}</span>`
+                                ).join('')}
+                            </div>
+                            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                                ${project.githubUrl && project.githubUrl !== '#' ? 
+                                    `<a href="${project.githubUrl}" target="_blank" class="btn btn-primary"><i class="fab fa-github"></i> View on GitHub</a>` : ''
+                                }
+                                ${project.demoUrl && project.demoUrl !== '#' ? 
+                                    `<a href="${project.demoUrl}" target="_blank" class="btn btn-secondary"><i class="fas fa-external-link-alt"></i> Live Demo</a>` : ''
+                                }
+                            </div>
+                        </div>
+                    `;
+                    modal.classList.add('active');
+                }
+            } catch (error) {
+                console.error('Error loading project details:', error);
+            }
+        });
+    });
 }
-
-// Apply debouncing to scroll events
-const debouncedScrollHandler = debounce(() => {
-    // Scroll-related functions can be debounced here
-}, 16); // 60fps
-
-window.addEventListener('scroll', debouncedScrollHandler);
 
 // Load Skills from JSON
 async function loadSkills() {
@@ -696,12 +656,11 @@ async function loadSkills() {
     }
 }
 
-// Render skills to the DOM
 function renderSkills(skills) {
     const skillsGrid = document.querySelector('.skills-grid');
     if (!skillsGrid) return;
 
-    skillsGrid.innerHTML = ''; // Clear existing content
+    skillsGrid.innerHTML = '';
 
     skills.forEach(skill => {
         const skillItem = document.createElement('div');
@@ -718,6 +677,36 @@ function renderSkills(skills) {
         skillsGrid.appendChild(skillItem);
     });
 
-    // Re-initialize scroll animations for new skill items
     initScrollAnimations();
 }
+
+// Add notification styles
+const style = document.createElement('style');
+style.textContent = `
+    .notification-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+    }
+    
+    .notification-close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #fff;
+        padding: 0;
+        line-height: 1;
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .notification-close:hover {
+        opacity: 0.8;
+    }
+`;
+document.head.appendChild(style);
