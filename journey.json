@@ -1,0 +1,32 @@
+{
+    "journey": [
+        {
+            "title": "Early Years",
+            "description": "Growing up in Sweden, I discovered my fascination with technology and computers at a young age. My curiosity combined with my love for video games led me to explore the digital world.",
+            "icon": "fas fa-child",
+            "imageUrl": "images/eliah-kid.png",
+            "meta": null
+        },
+        {
+            "title": "Teenage Years",
+            "description": "As a teenager, I began exploring programming and coding, realizing that I could create my own digital experiences. This sparked my passion for software development.",
+            "icon": "fas fa-laptop-code",
+            "imageUrl": null,
+            "meta": null
+        },
+        {
+            "title": "Fiber Technician",
+            "description": "Specialized in fiber network stability and provided technical support directly to customers. Gained hands-on experience in infrastructure.",
+            "icon": "fas fa-network-wired",
+            "imageUrl": null,
+            "meta": "Baramontage (July 2024 – July 2025)"
+        },
+        {
+            "title": "Graduate Engineer (TE4)",
+            "description": "Specializing in Software Design, Agile methodologies (Scrum), and scalable architecture. Focused on building meaningful digital solutions.",
+            "icon": "fas fa-user-graduate",
+            "imageUrl": "images/eliahdimmed.png",
+            "meta": "NTI Gymnasiet Helsingborg (Aug 2025 – Present)"
+        }
+    ]
+}

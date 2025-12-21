@@ -76,47 +76,18 @@
                 <!-- Interactive Journey -->
                 <div class="journey-section">
                     <h3 class="journey-title">My Journey</h3>
+
                     <div class="journey-container">
-                        <div class="journey-stage active" data-stage="1">
-                            <div class="journey-image">
-                                <i class="fas fa-child"></i>
-                            </div>
-                            <div class="journey-text">
-                                <h4>Early Years</h4>
-                                <p>Growing up in Sweden, I discovered my fascination with technology and computers at a
-                                    young age. The digital world always seemed like a magical place where anything was
-                                    possible.</p>
-                            </div>
-                        </div>
-
-                        <div class="journey-stage" data-stage="2">
-                            <div class="journey-image">
-                                <i class="fas fa-laptop-code"></i>
-                            </div>
-                            <div class="journey-text">
-                                <h4>Teenage Years</h4>
-                                <p>As a teenager, I began exploring programming and coding, realizing that I could
-                                    create my own digital experiences. This sparked my passion for software development.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="journey-stage" data-stage="3">
-                            <div class="journey-image">
-                                <i class="fas fa-user-graduate"></i>
-                            </div>
-                            <div class="journey-text">
-                                <h4>Present Day</h4>
-                                <p>Currently studying Technical fourth year (TE4) at NTI Helsingborg, I'm focused on
-                                    honing my skills in programming, IT, and building meaningful digital solutions.</p>
-                            </div>
-                        </div>
+                        <!-- Journey stages will be loaded dynamically from journey.json -->
                     </div>
 
-                    <div class="journey-navigation">
-                        <button class="journey-btn active" data-stage="1">1</button>
-                        <button class="journey-btn" data-stage="2">2</button>
-                        <button class="journey-btn" data-stage="3">3</button>
+                    <div class="journey-controls">
+                        <!-- Custom Slider with fill effect -->
+                        <div class="slider-container">
+                            <div class="slider-fill-bar"></div>
+                            <input type="range" min="0" max="100" value="0" class="journey-slider" id="journeySlider">
+                            <div class="journey-checkpoints"></div>
+                        </div>
                     </div>
                 </div>
 
@@ -163,7 +134,7 @@
             <h2 class="section-title">Get In Touch</h2>
             <div class="contact-content">
                 <div class="contact-info">
-                    <a href="mailto:eliah.vilding@hotmail.se" class="contact-item clickable">
+                    <a href="mailto:eliah.dimmed@gmail.com" class="contact-item clickable">
                         <i class="fas fa-envelope"></i>
                         <div>
                             <h4>Email</h4>

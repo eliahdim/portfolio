@@ -41,38 +41,200 @@ function initMobileMenu() {
     }
 }
 
-// Interactive Journey Navigation
-function initJourneyNavigation() {
-    const journeyBtns = document.querySelectorAll('.journey-btn');
-    const journeyStages = document.querySelectorAll('.journey-stage');
+// Interactive Journey Navigation (Slider)
+// Interactive Journey Navigation (Slider)
+// Interactive Journey Navigation (Slider)
+async function initJourneyNavigation() {
+    const container = document.querySelector('.journey-container');
+    const slider = document.querySelector('.journey-slider');
+    const checkpointsContainer = document.querySelector('.journey-checkpoints');
 
-    journeyBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            const targetStage = this.getAttribute('data-stage');
+    if (!container || !slider) return;
 
-            // Update active button
-            journeyBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
+    let snapPoints = [];
 
-            // Update active stage
-            journeyStages.forEach(stage => {
-                stage.classList.remove('active');
-                if (stage.getAttribute('data-stage') === targetStage) {
-                    stage.classList.add('active');
-                }
+    // Helper to update slider visual (fill effect)
+    function updateSliderVisual(percentage) {
+        slider.style.setProperty('--progress', `${percentage}%`);
+
+        // Update active state of checkpoints
+        const checkpoints = document.querySelectorAll('.journey-checkpoint');
+        checkpoints.forEach(cp => {
+            const cpLeft = parseFloat(cp.style.left);
+            if (percentage >= cpLeft - 1) { // -1 tolerance
+                cp.classList.add('active');
+            } else {
+                cp.classList.remove('active');
+            }
+        });
+    }
+
+    // Function to calculate and update snap points based on content
+    function updateSnapPoints() {
+        if (!container) return;
+
+        const stages = Array.from(container.querySelectorAll('.journey-stage'));
+        if (stages.length === 0) return;
+
+        snapPoints = [];
+        const containerWidth = container.clientWidth;
+        const scrollWidth = container.scrollWidth;
+        const maxScroll = scrollWidth - containerWidth;
+
+        // If content isn't scrollable, hide slider
+        if (maxScroll <= 0) {
+            slider.parentElement.style.display = 'none'; // Hide the whole container
+            return;
+        } else {
+            slider.parentElement.style.display = 'flex';
+        }
+
+        // Calculate snap points
+        stages.forEach((stage, index) => {
+            // Center alignment logic based on offsetLeft
+            const stageLeft = stage.offsetLeft;
+            const stageWidth = stage.offsetWidth;
+
+            let targetScroll = stageLeft + (stageWidth / 2) - (containerWidth / 2);
+            targetScroll = Math.max(0, Math.min(targetScroll, maxScroll));
+
+            const percentage = (targetScroll / maxScroll) * 100;
+
+            snapPoints.push({
+                index: index,
+                scrollPos: targetScroll,
+                percentage: percentage
             });
         });
-    });
 
-    // Auto-advance journey every 5 seconds (optional)
-    let currentStage = 1;
-    setInterval(() => {
-        currentStage = currentStage % 3 + 1;
-        const nextBtn = document.querySelector(`[data-stage="${currentStage}"]`);
-        if (nextBtn) {
-            nextBtn.click();
+        // Render checkpoints
+        if (checkpointsContainer) {
+            checkpointsContainer.innerHTML = '';
+            snapPoints.forEach(point => {
+                const checkpoint = document.createElement('div');
+                checkpoint.classList.add('journey-checkpoint');
+                checkpoint.style.left = `${point.percentage}%`;
+
+                // Add active class initially if at start
+                if (point.percentage === 0) checkpoint.classList.add('active');
+
+                checkpoint.addEventListener('click', () => {
+                    container.scrollTo({
+                        left: point.scrollPos,
+                        behavior: 'smooth'
+                    });
+                });
+
+                checkpointsContainer.appendChild(checkpoint);
+            });
         }
-    }, 5000);
+    }
+
+    try {
+        const response = await fetch('journey.json');
+        if (!response.ok) throw new Error('Failed to load journey data');
+        const data = await response.json();
+
+        // Render journey stages
+        container.innerHTML = data.journey.map(stage => `
+            <div class="journey-stage">
+                <div class="journey-content-box">
+                    <div class="journey-text-box">
+                        <h4>${stage.title}</h4>
+                        ${stage.meta ? `<p class="journey-meta">${stage.meta}</p>` : ''}
+                        <p>${stage.description}</p>
+                    </div>
+                    <div class="journey-image-box">
+                        ${stage.imageUrl
+                ? `<img src="${stage.imageUrl}" alt="${stage.title}" class="journey-img">`
+                : `<i class="${stage.icon}"></i>`
+            }
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        // Initial calculation
+        setTimeout(() => {
+            updateSnapPoints();
+            updateSliderVisual(0); // Init visual
+        }, 100);
+
+        // Resize listener
+        window.addEventListener('resize', () => {
+            updateSnapPoints();
+        });
+
+        // Slider Interaction (Input - Dragging)
+        slider.addEventListener('input', () => {
+            const scrollWidth = container.scrollWidth - container.clientWidth;
+            const scrollPos = (slider.value / 100) * scrollWidth;
+
+            // Instant scroll for responsiveness while dragging
+            container.scrollTo({
+                left: scrollPos,
+                behavior: 'auto'
+            });
+
+            updateSliderVisual(slider.value);
+        });
+
+        // Flag to prevent scroll listener from fighting with snap animation
+        let isSnapping = false;
+
+        // Slider Interaction (Change - Snapping only)
+        const snapToClosest = () => {
+            const currentVal = parseFloat(slider.value);
+
+            if (snapPoints.length > 0) {
+                const closest = snapPoints.reduce((prev, curr) => {
+                    return (Math.abs(curr.percentage - currentVal) < Math.abs(prev.percentage - currentVal) ? curr : prev);
+                });
+
+                isSnapping = true; // Prevent scroll listener from interfering
+                slider.blur(); // Remove focus
+
+                // Also update slider value directly to the snap point
+                slider.value = closest.percentage;
+                updateSliderVisual(closest.percentage);
+
+                container.scrollTo({
+                    left: closest.scrollPos,
+                    behavior: 'smooth'
+                });
+
+                // Reset flag after animation completes
+                setTimeout(() => {
+                    isSnapping = false;
+                }, 500);
+            }
+        };
+
+        slider.addEventListener('change', snapToClosest);
+
+        // Also snap on mouseup (for when user clicks on track between checkpoints)
+        // Use a small timeout to allow the slider value to update first
+        slider.addEventListener('mouseup', () => {
+            setTimeout(snapToClosest, 50);
+        });
+
+        // Scroll Sync (Container -> Slider)
+        container.addEventListener('scroll', () => {
+            // Don't update if snapping or if slider is being dragged
+            if (!isSnapping && document.activeElement !== slider) {
+                const scrollWidth = container.scrollWidth - container.clientWidth;
+                if (scrollWidth > 0) {
+                    const scrollPercentage = (container.scrollLeft / scrollWidth) * 100;
+                    slider.value = scrollPercentage;
+                    updateSliderVisual(scrollPercentage);
+                }
+            }
+        });
+
+    } catch (error) {
+        console.error('Error loading journey:', error);
+        container.innerHTML = '<p style="text-align:center; padding: 2rem;">Failed to load journey data.</p>';
+    }
 }
 
 // Smooth Scrolling for Navigation Links
