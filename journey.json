@@ -11,14 +11,14 @@
             "title": "Teenage Years",
             "description": "As a teenager, I began exploring programming and coding, realizing that I could create my own digital experiences. This sparked my passion for software development.",
             "icon": "fas fa-laptop-code",
-            "imageUrl": null,
+            "imageUrl": "images/eliah-teen.jpg",
             "meta": null
         },
         {
             "title": "Fiber Technician",
             "description": "Specialized in fiber network stability and provided technical support directly to customers. Gained hands-on experience in infrastructure.",
             "icon": "fas fa-network-wired",
-            "imageUrl": null,
+            "imageUrl": "images/eliah-fiber.jpg",
             "meta": "Baramontage (July 2024 – July 2025)"
         },
         {
