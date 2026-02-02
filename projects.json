@@ -41,8 +41,22 @@
         "React"
       ],
       "githubUrl": "https://github.com/IsakPetersson/React-API",
-      "demoUrl": "#",
+      "demoUrl": "https://hypixeltracker.azurewebsites.net/",
       "imageUrl": "images/skyblocktracker.png"
+    },
+    {
+      "id": 4,
+      "title": "Ragazzi dei Profumi",
+      "description": "A simple website built for my cousin selling perfume decants.",
+      "icon": "fas fa-project-diagram",
+      "technologies": [
+        "Vite",
+        "React",
+        "CSS"
+      ],
+      "githubUrl": "https://github.com/eliahdim/ragazzi-dei-profumi-website",
+      "demoUrl": "https://ragazzi-dei-profumi.vercel.app/",
+      "imageUrl": "images/ragazzi.png"
     }
   ]
 }
