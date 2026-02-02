@@ -568,7 +568,7 @@ section {
     position: relative;
     margin-bottom: var(--spacing-2xl);
     display: flex;
-    align-items: center;
+    width: 100%;
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.6s ease;
@@ -580,29 +580,41 @@ section {
 }
 
 .journey-stage:nth-child(odd) {
-    flex-direction: row;
+    justify-content: flex-start;
+    padding-right: 50px;
+    /* Space for center line */
 }
 
 .journey-stage:nth-child(even) {
-    flex-direction: row-reverse;
+    justify-content: flex-end;
+    padding-left: 50px;
+    /* Space for center line */
 }
 
 .journey-stage-content {
-    flex: 1;
+    width: 45%;
     background: rgba(30, 92, 71, 0.3);
-    /* Warmer/Darker opacity to replace blur */
-    /* backdrop-filter: blur(10px); REMOVED */
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: var(--spacing-lg);
     position: relative;
     z-index: 3;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.journey-stage-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Arrows pointing to center */
 .journey-stage-content::before {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 30px;
+    /* Align with top part roughly */
     width: 0;
     height: 0;
     border-style: solid;
@@ -611,27 +623,28 @@ section {
 .journey-stage:nth-child(odd) .journey-stage-content::before {
     right: -15px;
     border-width: 10px 0 10px 15px;
-    border-color: transparent transparent transparent var(--bg-card);
+    border-color: transparent transparent transparent rgba(30, 92, 71, 0.3);
+    /* Match bg */
 }
 
 .journey-stage:nth-child(even) .journey-stage-content::before {
     left: -15px;
     border-width: 10px 15px 10px 0;
-    border-color: transparent var(--bg-card) transparent transparent;
+    border-color: transparent rgba(30, 92, 71, 0.3) transparent transparent;
 }
 
 .journey-stage-marker {
     position: absolute;
     left: 50%;
+    top: 30px;
+    /* Align with top of cards */
     transform: translateX(-50%);
     width: 20px;
     height: 20px;
     background: var(--accent-primary);
     border: 4px solid var(--bg-secondary);
     border-radius: 50%;
-    border-radius: 50%;
     box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
-    /* Reduced shadow spread */
     z-index: 2;
 }
 
@@ -654,23 +667,37 @@ section {
     line-height: 1.8;
 }
 
-.journey-icon {
-    flex: 0 0 200px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 5rem;
-    color: var(--accent-primary);
+.journey-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
     position: relative;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.journey-icon img {
+.journey-image-container img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: var(--radius-lg);
-    border: 2px solid var(--border-glow);
+    transition: transform 0.5s ease;
+}
+
+.journey-stage-content:hover .journey-image-container img {
+    transform: scale(1.05);
+}
+
+.journey-icon-container {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+    font-size: 3rem;
+    color: var(--accent-primary);
+}
+
+.journey-text {
+    padding: var(--spacing-lg);
 }
 
 /* Professional Summary */

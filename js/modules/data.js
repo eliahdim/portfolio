@@ -15,16 +15,16 @@ export async function initJourneyTimeline(observer) {
         timelineContainer.innerHTML = data.journey.map((stage) => `
             <div class="journey-stage">
                 <div class="journey-stage-marker"></div>
-                <div class="journey-icon">
-                    ${stage.imageUrl
-                ? `<img src="${stage.imageUrl}" alt="${stage.title}" loading="lazy" width="200" height="200">`
-                : `<i class="${stage.icon}"></i>`
-            }
-                </div>
                 <div class="journey-stage-content">
-                    <h4>${stage.title}</h4>
-                    ${stage.meta ? `<p class="journey-meta">${stage.meta}</p>` : ''}
-                    <p>${stage.description}</p>
+                    ${stage.imageUrl
+                        ? `<div class="journey-image-container"><img src="${stage.imageUrl}" alt="${stage.title}" loading="lazy"></div>`
+                        : `<div class="journey-icon-container"><i class="${stage.icon}"></i></div>`
+                    }
+                    <div class="journey-text">
+                        <h4>${stage.title}</h4>
+                        ${stage.meta ? `<p class="journey-meta">${stage.meta}</p>` : ''}
+                        <p>${stage.description}</p>
+                    </div>
                 </div>
             </div>
         `).join('');
