@@ -57,6 +57,21 @@
       "githubUrl": "https://github.com/eliahdim/ragazzi-dei-profumi-website",
       "demoUrl": "https://ragazzi-dei-profumi.vercel.app/",
       "imageUrl": "images/ragazzi.png"
+    },
+    {
+      "id": 5,
+      "title": "1Percent",
+      "description": "A fullstack web application that helps users visualize and manage their life goals by breaking them down into an interactive, tree-based hierarchy of actionable sub-goals.",
+      "icon": "fa-solid fa-percent",
+      "technologies": [
+        "Vite",
+        "React",
+        "JavaScript",
+        "CSS"
+      ],
+      "githubUrl": "https://github.com/eliahdim/1Percent",
+      "demoUrl": "#",
+      "imageUrl": "images/1percent.png"
     }
   ]
 }

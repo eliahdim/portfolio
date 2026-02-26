@@ -48,7 +48,6 @@ export function initContactForm() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
 
         try {
-            // REPLACE 'YOUR_FORMSPREE_ID' with your actual ID from Formspree
             const response = await fetch('https://formspree.io/f/xeelnlog', {
                 method: 'POST',
                 body: formData,
