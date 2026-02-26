@@ -33,14 +33,45 @@ export function initContactForm() {
     const contactForm = document.querySelector('.contact-form');
     if (!contactForm) return;
 
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', async function (e) {
         e.preventDefault();
+
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerHTML;
         const formData = new FormData(this);
-        // Simple validation...
+
+        // Basic validation
         if (!formData.get('name') || !formData.get('email') || !formData.get('message')) return;
 
-        showNotification('Thank you! I will respond shortly.', 'success');
-        this.reset();
+        // Visual feedback: disable button and show loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+        try {
+            // REPLACE 'YOUR_FORMSPREE_ID' with your actual ID from Formspree
+            const response = await fetch('https://formspree.io/f/xeelnlog', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                showNotification('Message sent! I will get back to you soon.', 'success');
+                this.reset();
+            } else {
+                const data = await response.json();
+                const errorMessage = data.errors ? data.errors.map(err => err.message).join(', ') : 'Submission failed.';
+                showNotification(`Error: ${errorMessage}`, 'error');
+            }
+        } catch (error) {
+            showNotification('Could not connect to the server. Please try again later.', 'error');
+        } finally {
+            // Restore button state
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnText;
+        }
     });
 }
 
@@ -64,7 +95,7 @@ export function showNotification(message, type = 'info') {
     notification.className = `notification notification-${type}`;
     notification.style.cssText = `
         position: fixed; top: 100px; right: 20px; 
-        background: ${type === 'success' ? '#22c55e' : '#3b82f6'}; 
+        background: ${type === 'success' ? '#22c55e' : type === 'error' ? '#ef4444' : '#3b82f6'}; 
         color: white; padding: 1rem; border-radius: 8px; z-index: 9999;
         box-shadow: 0 4px 12px rgba(0,0,0,0.15); animation: slideIn 0.3s ease;
     `;
