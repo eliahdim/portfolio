@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import SectionHeader from './SectionHeader.jsx';
-import { contacts } from '../data/siteData.js';
+import { contacts, profile } from '../data/siteData.js';
 
 const initialForm = {
   name: '',
@@ -53,6 +53,14 @@ export default function Contact() {
 
         <div className="contact-content">
           <div className="contact-info" aria-label="Contact links">
+            <a href={profile.cvUrl} className="contact-item contact-item-featured reveal" download>
+              <i className="fas fa-file-arrow-down" aria-hidden="true" />
+              <span>
+                <strong>CV</strong>
+                <span>Download my resume as PDF</span>
+              </span>
+            </a>
+
             {contacts.map((contact) => (
               <a
                 href={contact.href}

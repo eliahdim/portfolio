@@ -5,6 +5,7 @@ export const profile = {
   email: 'eliah.dimmed@gmail.com',
   linkedin: 'https://www.linkedin.com/in/eliah-dimmed/',
   github: 'https://github.com/eliahdim',
+  cvUrl: 'files/eliah-dimmed-cv.pdf',
   badge: 'TE4 engineering student focused on software design',
   role: 'Junior Web Developer / IT Technician',
   tagline:

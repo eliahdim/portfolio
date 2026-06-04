@@ -81,6 +81,22 @@ public/images/
 
 Use `images/file-name.ext` when referencing them from React data or components. Relative paths keep the site working on GitHub Pages project URLs.
 
+## Adding Your CV
+
+Drop your PDF CV here:
+
+```text
+public/files/eliah-dimmed-cv.pdf
+```
+
+The hero and contact section already include `Download CV` links pointing to:
+
+```text
+files/eliah-dimmed-cv.pdf
+```
+
+If you want another filename later, update `cvUrl` in `src/data/siteData.js`.
+
 ## Accessibility and UX Notes
 
 The React version improves several issues from the old static implementation:

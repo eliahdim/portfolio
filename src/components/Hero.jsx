@@ -32,6 +32,10 @@ export default function Hero() {
               <span>Contact Me</span>
               <i className="fas fa-envelope" aria-hidden="true" />
             </a>
+            <a href={profile.cvUrl} className="btn btn-secondary" download>
+              <span>Download CV</span>
+              <i className="fas fa-file-arrow-down" aria-hidden="true" />
+            </a>
           </div>
         </div>
 
