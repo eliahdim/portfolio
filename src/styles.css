@@ -379,6 +379,55 @@ section {
   gap: var(--spacing-sm);
 }
 
+.hero-profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  align-items: center;
+  margin-top: var(--spacing-md);
+  color: var(--text-muted);
+}
+
+.hero-profile-label {
+  color: var(--text-dim);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-profile-link {
+  display: inline-flex;
+  gap: 0.45rem;
+  align-items: center;
+  min-height: 40px;
+  padding: 0.52rem 0.8rem;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-decoration: none;
+  background: rgba(30, 92, 71, 0.16);
+  border: 1px solid rgba(30, 92, 71, 0.72);
+  border-radius: 999px;
+  transition:
+    color var(--transition-fast),
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.hero-profile-link i {
+  color: var(--emerald-bright);
+  font-size: 1rem;
+}
+
+.hero-profile-link:hover {
+  color: var(--emerald-bright);
+  background: rgba(34, 197, 94, 0.09);
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
 .hero-visual {
   display: flex;
   align-items: center;
@@ -1211,6 +1260,10 @@ section {
     justify-content: center;
   }
 
+  .hero-profile-links {
+    justify-content: center;
+  }
+
   .journey-timeline::before {
     left: 30px;
   }
@@ -1295,6 +1348,21 @@ section {
 
   .btn {
     width: 100%;
+  }
+
+  .hero-profile-links {
+    gap: 0.55rem;
+    justify-content: center;
+  }
+
+  .hero-profile-label {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-profile-link {
+    flex: 1 1 130px;
+    justify-content: center;
   }
 
   .skills-grid {

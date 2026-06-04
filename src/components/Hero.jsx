@@ -37,6 +37,30 @@ export default function Hero() {
               <i className="fas fa-file-arrow-down" aria-hidden="true" />
             </a>
           </div>
+
+          <div className="hero-profile-links" aria-label="Professional profiles">
+            <span className="hero-profile-label">Profiles</span>
+            <a
+              href={profile.github}
+              className="hero-profile-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Eliah Dimmed's GitHub profile"
+            >
+              <i className="fab fa-github" aria-hidden="true" />
+              <span>GitHub</span>
+            </a>
+            <a
+              href={profile.linkedin}
+              className="hero-profile-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open Eliah Dimmed's LinkedIn profile"
+            >
+              <i className="fab fa-linkedin" aria-hidden="true" />
+              <span>LinkedIn</span>
+            </a>
+          </div>
         </div>
 
         <div className="hero-visual reveal visible">
