@@ -17,7 +17,7 @@ export const profile = {
 export const stats = [
   { value: '1+', label: 'Year IT Field Experience' },
   { value: '8', label: 'Core Technologies' },
-  { value: '5', label: 'Public Projects' },
+  { value: '7', label: 'Public Projects' },
 ];
 
 export const journey = [
@@ -75,14 +75,14 @@ export const projects = [
   {
     id: 1,
     title: 'TrustScribe',
-    summary: 'A locally driven AI transcription tool built for Skolverkets Innovationslabb.',
-    role: 'Developer / contributor',
+    summary: 'A local-first desktop transcription tool for sensitive Swedish and English recordings.',
+    role: 'TE4 team project / developer',
     description:
-      'Built around the need to transcribe sensitive material locally instead of sending recordings through public cloud tools. The project combines a simple web interface with Python-based transcription workflow concepts.',
+      'Built for a real-world school innovation context where audio and video files should be transcribed locally instead of being sent to cloud services. The app uses Python, PyWebView, ffmpeg, Whisper/kb-whisper models, cached model management, queue-based processing, progress tracking, and saved transcript browsing.',
     outcome:
-      'Strongest portfolio project because it connects software, automation, privacy, and a real organization context.',
-    technologies: ['HTML', 'CSS', 'JavaScript', 'Python', 'AI integration'],
-    githubUrl: 'https://github.com/CarlAxelson/Skolverket-transkribering',
+      'This is one of my strongest portfolio projects because it combines AI, privacy, desktop UI, automation, and practical requirements from an external context.',
+    technologies: ['Python', 'PyWebView', 'Whisper', 'ffmpeg', 'AI transcription'],
+    githubUrl: 'https://github.com/NTIG-Helsingborg/TE4_25-26_Skolverket-transkribering',
     demoUrl: '',
     imageUrl: 'images/trustscribe-image.jpg',
     featured: true,
@@ -91,13 +91,13 @@ export const projects = [
     id: 5,
     title: '1Percent',
     summary:
-      'A goal-planning web app that breaks large life goals into an interactive hierarchy of smaller actions.',
+      'A full-stack goal visualization app for breaking large ambitions into interactive subgoal trees.',
     role: 'Creator',
     description:
-      'Designed to help users turn broad ambitions into smaller, visible steps. The project is a good place to show React state, structured UI thinking, and product-oriented problem solving.',
+      'Built with a React/Vite frontend, React Flow canvas, Express backend, and SQLite persistence. The app supports goal creation, nested subgoals, progress tracking, drag behavior, auto-layout with dagre, settings, toast feedback, and backend API calls for storing goal trees.',
     outcome:
-      'Worth expanding with authentication, persistence, and a polished demo because the concept is strong and easy for recruiters to understand.',
-    technologies: ['Vite', 'React', 'JavaScript', 'CSS'],
+      'Shows full-stack thinking, interactive UI architecture, persistent data, and a product idea that is easy for recruiters to understand.',
+    technologies: ['React', 'Vite', 'React Flow', 'Express', 'SQLite'],
     githubUrl: 'https://github.com/eliahdim/1Percent',
     demoUrl: '',
     imageUrl: 'images/1percent.png',
@@ -106,40 +106,70 @@ export const projects = [
   {
     id: 4,
     title: 'Ragazzi dei Profumi',
-    summary: 'A product-focused website built for a perfume decant business.',
+    summary: 'A luxury fragrance sample website with product browsing and detail pages.',
     role: 'Frontend developer',
     description:
-      'Created a clean React/Vite site for a small real-world use case. This project is useful for showing layout, product presentation, responsive design, and deployment skills.',
+      'Built as a product-focused React/Vite website for a perfume decant concept. It uses React Router for a home page and individual fragrance detail pages, with emphasis on product presentation, visual design, and responsive browsing.',
     outcome:
-      'A practical client-style project with a live deployment and a clear audience.',
-    technologies: ['Vite', 'React', 'CSS'],
+      'A practical client-style project that demonstrates frontend structure, routing, visual polish, and deployment.',
+    technologies: ['React', 'Vite', 'React Router', 'CSS'],
     githubUrl: 'https://github.com/eliahdim/ragazzi-dei-profumi-website',
     demoUrl: 'https://ragazzi-dei-profumi.vercel.app/',
     imageUrl: 'images/ragazzi.png',
   },
   {
+    id: 6,
+    title: 'Home-E',
+    summary: 'A hackathon-built family hub app for organizing household tasks, meals, shopping, and activities.',
+    role: 'Hackathon team project / developer',
+    description:
+      'Built by a three-person team during HetchHacks as a family management app using Vue 3, Electron, Vite, and LocalStorage. The project includes a customizable widget dashboard, shopping list, meal countdowns, todo tracking, activity tracking, themes, and a roadmap toward mobile apps with Capacitor.',
+    outcome:
+      'Shows teamwork, fast product development, cross-platform thinking, and ability to build a usable prototype under hackathon constraints.',
+    technologies: ['Vue 3', 'Electron', 'Vite', 'Capacitor', 'LocalStorage'],
+    githubUrl: 'https://github.com/Mykyta-G/Home-E',
+    demoUrl: '',
+    imageUrl: '',
+    icon: 'fas fa-house-laptop',
+  },
+  {
     id: 3,
     title: 'Hypixel Skyblock Tracker',
-    summary: 'A school project for tracking items in Hypixel Skyblock.',
-    role: 'Frontend developer',
+    summary: 'A React API project for browsing and filtering Hypixel Skyblock item data.',
+    role: 'TE4 school project / frontend developer',
     description:
-      'A React/API project built around game data. It shows experience with external data, rendering dynamic UI, and deploying a web app.',
+      'Built as a React API project using external data from Hypixel Skyblock and Minecraft item APIs. The app includes item search, rarity/category/type filters, item image handling, favorites logic, login-related UI, and a live Azure deployment.',
     outcome:
-      'Good evidence of API-driven frontend work, but the README and project writeup should explain the API, data flow, and your individual contribution.',
-    technologies: ['HTML', 'CSS', 'JavaScript', 'React'],
-    githubUrl: 'https://github.com/IsakPetersson/React-API',
+      'Demonstrates API consumption, dynamic filtering, React state, deployed frontend work, and handling messy real-world game data.',
+    technologies: ['React', 'JavaScript', 'API integration', 'Bootstrap', 'Azure'],
+    githubUrl: 'https://github.com/NTIG-Helsingborg/TE4_25-26_React-API',
     demoUrl: 'https://hypixeltracker.azurewebsites.net/',
     imageUrl: 'images/skyblocktracker.png',
   },
   {
+    id: 7,
+    title: 'Aiming for Disaster',
+    summary: 'A TE4 Unity game project built as part of a school team.',
+    role: 'TE4 team project / Unity developer',
+    description:
+      'A Unity game project from TE4. I am including it separately from my older exam work because it represents later game-development practice in a team environment, with a larger school-owned repository and Unity project structure.',
+    outcome:
+      'Useful for showing range beyond web development: C#, Unity workflows, teamwork, gameplay iteration, and working inside a larger project repository.',
+    technologies: ['Unity', 'C#', 'Game development', 'Team project'],
+    githubUrl: 'https://github.com/NTIG-Helsingborg/TE4_25-26_Aiming-for-Disaster',
+    demoUrl: '',
+    imageUrl: '',
+    icon: 'fas fa-crosshairs',
+  },
+  {
     id: 2,
-    title: 'Exam Work Platformer',
-    summary: 'A 2D Unity platformer focused on game performance optimization.',
+    title: 'Pootis Adventures',
+    summary: 'A high school exam-work 2D platformer with four playable levels.',
     role: 'Game developer',
     description:
-      'Built as high school exam work in Unity. The strongest hiring angle is the performance focus: frame rate, asset usage, and optimization decisions.',
+      'Built as my high school exam work in Unity. The game is a 2D platformer where the player moves through four levels using simple keyboard controls, with graphics, sound effects, and music sourced from the Unity Asset Store.',
     outcome:
-      'Useful as a technical learning project, especially if the repository explains the performance bottlenecks and optimizations.',
+      'Useful as an early technical project showing C#, Unity basics, level design, game loops, and the progression from school assignments into larger TE4 projects.',
     technologies: ['C#', 'Unity'],
     githubUrl: 'https://github.com/eliahdim/GA_Game',
     demoUrl: '',

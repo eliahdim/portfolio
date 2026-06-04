@@ -37,7 +37,7 @@ function ProjectCard({ project, onOpenProject }) {
         {project.imageUrl ? (
           <img src={project.imageUrl} alt={`${project.title} screenshot`} loading="lazy" />
         ) : (
-          <i className={project.icon} aria-hidden="true" />
+          <i className={project.icon || 'fas fa-code'} aria-hidden="true" />
         )}
       </div>
 
