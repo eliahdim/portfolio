@@ -1,254 +1,43 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eliah Dimmed | Junior Web Developer & IT Technician</title>
+    <meta
+      name="description"
+      content="Portfolio of Eliah Dimmed, a TE4 engineering student in Sweden focused on junior web development, IT infrastructure, automation, and practical problem solving."
+    />
+    <meta name="author" content="Eliah Dimmed" />
+    <meta name="theme-color" content="#0d1412" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Eliah Dimmed | Junior Web Developer & IT Technician" />
+    <meta
+      property="og:description"
+      content="Projects, technical background, and contact details for Eliah Dimmed."
+    />
+    <meta property="og:image" content="images/eliahdimmed.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eliah Dimmed</title>
-    <meta name="description"
-        content="Eliah Dimmed - Graduate Engineer Student (TE4) specializing in Software Design, Automation, and AI. Solution-oriented developer bridging software and infrastructure.">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="images/eliahdimmed.jpg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-</head>
-
-<body>
-    <!-- Header / Navigation -->
-    <header class="header">
-        <nav class="nav">
-            <div class="nav-container">
-                <div class="nav-logo">
-                    <a href="#home">E.D</a>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link">Home</a></li>
-                    <li><a href="#about" class="nav-link">About Me</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <div class="nav-toggle">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <canvas id="jungleCanvas" class="jungle-canvas"></canvas>
-        <div class="hero-canopy"></div>
-        <div class="scroll-indicator">
-            <span>Explore</span>
-            <div class="mouse">
-                <div class="wheel"></div>
-            </div>
-        </div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-badge">Graduate Engineer Student (TE4)</div>
-                <h1 class="hero-title">
-                    <span class="hero-name">Eliah Dimmed</span>
-                    <span class="hero-role">Software Design • Automation • AI</span>
-                </h1>
-                <p class="hero-tagline">
-                    Solution-oriented engineer bridging software development and IT infrastructure. Combining coding
-                    expertise with hands-on experience from the fiber optics industry.
-                </p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" data-type="experience">0</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-type="technologies">0</span>
-                        <span class="stat-label">Technologies</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" data-type="projects">0</span>
-                        <span class="stat-label">Public Projects</span>
-                    </div>
-                </div>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <span>Explore My Work</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <span>Get In Touch</span>
-                        <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="hero-visual">
-                <div class="hero-image">
-                    <img src="images/eliahdimmed.jpg" alt="Eliah Bäckström Dimmed - Software Developer"
-                        class="profile-photo">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Me Section -->
-    <section id="about" class="about">
-        <div class="about-bg"></div>
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">My journey through technology and growth</p>
-            </div>
-            <div class="about-content">
-                <!-- Interactive Journey Timeline -->
-                <div class="journey-section">
-                    <h3 class="journey-title">My Journey</h3>
-                    <div class="journey-timeline">
-                        <!-- Journey stages will be loaded dynamically from journey.json -->
-                    </div>
-                </div>
-
-                <!-- Skills Section -->
-                <div class="skills-section">
-                    <h3 class="skills-title">Skills & Technologies</h3>
-                    <div class="skills-grid">
-                        <!-- Skills will be loaded dynamically from skills.json -->
-                    </div>
-                </div>
-
-                <!-- Professional Summary -->
-                <div class="professional-summary">
-                    <h3 class="summary-title">Professional Profile</h3>
-                    <div class="summary-content">
-                        <p class="summary-text">
-                            Solution-oriented engineering student who bridges the gap between software development and
-                            physical IT infrastructure. Combines coding skills in Python and JavaScript with practical,
-                            hands-on experience from the fiber optics industry. Recognized for a "doer" mindset, being
-                            highly structured, and possessing a high capacity for learning new technologies quickly,
-                            particularly AI-driven automation.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Personal Info -->
-                <div class="personal-info">
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h4>Location</h4>
-                        <p>Hässleholm, Sweden</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fas fa-language"></i></div>
-                        <h4>Languages</h4>
-                        <p>Swedish, English</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fas fa-heart"></i></div>
-                        <h4>Interests</h4>
-                        <p>Football, Video games, IT</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fas fa-phone"></i></div>
-                        <h4>Phone</h4>
-                        <p>070-867 15 87</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="projects-bg"></div>
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">My Projects</h2>
-                <p class="section-subtitle">Exploring the digital jungle, one project at a time</p>
-            </div>
-            <div class="projects-grid">
-                <!-- Projects will be loaded dynamically from projects.json -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Project Modal -->
-    <div id="projectModal" class="project-modal">
-        <div class="modal-overlay"></div>
-        <div class="modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="modal-body">
-                <!-- Content will be populated by JavaScript -->
-            </div>
-        </div>
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="root">
+      <main class="app-error">
+        <h1>Loading Eliah Dimmed portfolio...</h1>
+        <p>If this message stays visible, the React bundle did not load.</p>
+      </main>
     </div>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Get In Touch</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <a href="mailto:eliah.dimmed@gmail.com" class="contact-item clickable">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h4>Email</h4>
-                            <p>eliah.dimmed@gmail.com</p>
-                        </div>
-                    </a>
-                    <a href="https://www.linkedin.com/in/eliah-dimmed/" target="_blank" rel="noopener noreferrer"
-                        class="contact-item clickable">
-                        <i class="fab fa-linkedin"></i>
-                        <div>
-                            <h4>LinkedIn</h4>
-                            <p>linkedin.com/in/eliah-dimmed</p>
-                        </div>
-                    </a>
-                    <a href="https://github.com/eliahdim" target="_blank" rel="noopener noreferrer"
-                        class="contact-item clickable">
-                        <i class="fab fa-github"></i>
-                        <div>
-                            <h4>GitHub</h4>
-                            <p>github.com/eliahdim</p>
-                        </div>
-                    </a>
-                </div>
-
-                <form class="contact-form" action="https://formspree.io/f/xeelnlog" method="POST">
-                    <div class="form-group">
-                        <input type="text" id="name" name="name" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Eliah Bäckström Dimmed. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- JavaScript -->
-    <script type="module" src="js/main.js"></script>
-</body>
-
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
