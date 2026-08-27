@@ -7,6 +7,9 @@ const initialForm = {
   message: '',
 };
 
+const formEndpoint =
+  import.meta.env.VITE_FORMSPREE_ENDPOINT || 'https://formspree.io/f/xeelnlog';
+
 export default function Contact({ contacts, profile, copy }) {
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState({ type: 'idle' });
@@ -30,14 +33,20 @@ export default function Contact({ contacts, profile, copy }) {
 
     try {
       const formData = new FormData(event.currentTarget);
-      const response = await fetch('https://formspree.io/f/xeelnlog', {
+      const response = await fetch(formEndpoint, {
         method: 'POST',
         body: formData,
         headers: { Accept: 'application/json' },
       });
 
       if (!response.ok) {
-        throw new Error('Submission failed.');
+        const responseData = await response.json().catch(() => null);
+        const responseMessage = responseData?.errors
+          ?.map((error) => error.message)
+          .filter(Boolean)
+          .join(', ');
+
+        throw new Error(responseMessage || 'Submission failed.');
       }
 
       setForm(initialForm);
@@ -83,7 +92,30 @@ export default function Contact({ contacts, profile, copy }) {
             ))}
           </div>
 
-          <form className="contact-form reveal" onSubmit={handleSubmit}>
+          <form
+            className="contact-form reveal"
+            action={formEndpoint}
+            method="POST"
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="hidden"
+              name="_subject"
+              value="Nytt meddelande från Eliah Dimmed Portfolio"
+            />
+            <input type="hidden" name="_source" value="eliahdimmed.vercel.app" />
+
+            <div className="form-honeypot" aria-hidden="true">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                id="website"
+                name="_gotcha"
+                tabIndex="-1"
+                autoComplete="off"
+              />
+            </div>
+
             <div className="form-group">
               <label htmlFor="name">{copy.nameLabel}</label>
               <input

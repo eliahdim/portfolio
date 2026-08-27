@@ -110,6 +110,19 @@ public/files/eliah-dimmed-cv.pdf
 
 The hero and contact sections use `profile.cvUrl` from `src/data/siteData.js`.
 
+## Contact Form
+
+The contact form sends submissions through Formspree. The current form endpoint is used as a
+fallback in `src/components/Contact.jsx`, while deployments can override it with:
+
+```text
+VITE_FORMSPREE_ENDPOINT=https://formspree.io/f/your-form-id
+```
+
+Configure and verify the recipient address in the Formspree dashboard. The form includes a
+honeypot field for basic spam filtering, a descriptive email subject, loading feedback, and
+localized success and error messages.
+
 ## Accessibility and UX Notes
 
 The React version improves several issues from the old static implementation:
