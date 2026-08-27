@@ -44,6 +44,12 @@ export default function ProjectModal({ project, onClose, copy }) {
 
   if (!project) return null;
 
+  const images = project.imageUrls?.length
+    ? project.imageUrls
+    : project.imageUrl
+      ? [project.imageUrl]
+      : [];
+
   return (
     <div className="project-modal active" role="presentation">
       <button
@@ -71,8 +77,18 @@ export default function ProjectModal({ project, onClose, copy }) {
         </button>
 
         <div className="modal-inner-content">
-          {project.imageUrl ? (
-            <img src={project.imageUrl} alt="" className="modal-img" loading="lazy" />
+          {images.length ? (
+            <div className={`modal-gallery${images.length === 1 ? ' single' : ''}`}>
+              {images.map((imageUrl, index) => (
+                <img
+                  src={imageUrl}
+                  alt={`${project.title} ${copy.galleryImageLabel(index + 1, images.length)}`}
+                  className="modal-img"
+                  loading="lazy"
+                  key={imageUrl}
+                />
+              ))}
+            </div>
           ) : null}
 
           <div className="modal-copy">

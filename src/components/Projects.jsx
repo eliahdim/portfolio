@@ -18,11 +18,12 @@ export default function Projects({ projects, onOpenProject, copy }) {
         />
 
         <div className="projects-grid" id="projects-grid">
-          {visibleProjects.map((project) => (
+          {visibleProjects.map((project, index) => (
             <ProjectCard
               project={project}
               onOpenProject={onOpenProject}
               copy={copy}
+              isExpandedProject={index >= initiallyVisible}
               key={project.id}
             />
           ))}
@@ -47,7 +48,7 @@ export default function Projects({ projects, onOpenProject, copy }) {
   );
 }
 
-function ProjectCard({ project, onOpenProject, copy }) {
+function ProjectCard({ project, onOpenProject, copy, isExpandedProject }) {
   const hasGithub = Boolean(project.githubUrl);
   const hasDemo = Boolean(project.demoUrl);
 
@@ -56,7 +57,9 @@ function ProjectCard({ project, onOpenProject, copy }) {
   }
 
   return (
-    <article className={`project-card reveal${project.featured ? ' featured' : ''}`}>
+    <article
+      className={`project-card reveal${isExpandedProject ? ' visible' : ''}${project.featured ? ' featured' : ''}`}
+    >
       {project.featured ? <span className="project-badge">{copy.featured}</span> : null}
       <div className="project-image">
         {project.imageUrl ? (

@@ -76,6 +76,7 @@ const enUi = {
   },
   modal: {
     closeLabel: 'Close project details',
+    galleryImageLabel: (index, total) => `screenshot ${index} of ${total}`,
     technologiesSuffix: 'technologies',
     viewGithub: 'View GitHub',
     liveDemo: 'Live Demo',
@@ -113,7 +114,7 @@ const svJourney = [
   {
     title: 'Fibertekniker',
     description:
-      'Installerade och felsökte fiberinfrastruktur i två 23-våningshus i Malmö. Arbetet omfattade fiberblåsning och fibersvetsning, CAT6, mediaskåp, routrar, TV-utrustning, felavhjälpning och direkt kundkontakt.',
+      'Arbetade med installation, driftsättning och felsökning av fiber- och nätverksinfrastruktur i bostadsmiljöer. Arbetet omfattade fiberblåsning och fibersvetsning, CAT6, mediaskåp, routrar, TV-utrustning, felavhjälpning och direkt kundkontakt.',
     icon: 'fas fa-network-wired',
     imageUrl: 'images/eliah-fiber.jpg',
     meta: 'Baramontage, juli 2024–juli 2025',
@@ -131,6 +132,7 @@ const svJourney = [
     description:
       'Utvecklade praktiska AI-verktyg för arbetsflöden inom e-handel, däribland CopyForge, ConversionLens och CampaignForge. Arbetade självständigt på distans med snabb återkoppling och produktfokuserade leveranser.',
     icon: 'fas fa-wand-magic-sparkles',
+    imageUrl: 'images/zynq-praktik.jpeg',
     meta: 'ZYNQ Media Group, TE4-praktik, 2026',
   },
   {
@@ -138,6 +140,7 @@ const svJourney = [
     description:
       'Arbetade med webbutveckling, visuell design och planering av ett internt skolsystem för närvaro och schemaläggning. Praktiken stärkte min anpassningsförmåga, kommunikation och förmåga att arbeta på engelska i en internationell miljö.',
     icon: 'fas fa-globe-europe',
+    imageUrl: 'images/malta-praktik.JPG',
     meta: 'Ascencia Malta, Erasmus+-praktik, 2026',
   },
 ];
@@ -318,6 +321,7 @@ const svUi = {
   },
   modal: {
     closeLabel: 'Stäng projektdetaljer',
+    galleryImageLabel: (index, total) => `skärmbild ${index} av ${total}`,
     technologiesSuffix: 'tekniker',
     viewGithub: 'Visa på GitHub',
     liveDemo: 'Öppna demo',

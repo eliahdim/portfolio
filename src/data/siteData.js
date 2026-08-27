@@ -32,7 +32,7 @@ export const journey = [
   {
     title: 'Fiber Technician',
     description:
-      'Installed and troubleshot fiber infrastructure in two 23-storey residential buildings in Malmö. The work included fiber blowing and splicing, CAT6, media cabinets, routers, TV equipment, fault finding, and direct customer contact.',
+      'Worked with the installation, commissioning, and troubleshooting of fiber and network infrastructure in residential environments. The work included fiber blowing and splicing, CAT6, media cabinets, routers, TV equipment, fault finding, and direct customer contact.',
     icon: 'fas fa-network-wired',
     imageUrl: 'images/eliah-fiber.jpg',
     meta: 'Baramontage, July 2024 - July 2025',
@@ -50,6 +50,7 @@ export const journey = [
     description:
       'Created practical AI-assisted tools for e-commerce workflows, including CopyForge, ConversionLens, and CampaignForge. Worked independently in a remote environment with fast feedback and product-focused delivery.',
     icon: 'fas fa-wand-magic-sparkles',
+    imageUrl: 'images/zynq-praktik.jpeg',
     meta: 'ZYNQ Media Group, TE4 work placement, 2026',
   },
   {
@@ -57,6 +58,7 @@ export const journey = [
     description:
       'Worked with website development, visual design, and planning for an internal school system covering attendance and scheduling. The placement strengthened my adaptability, communication, and ability to work in English in an international environment.',
     icon: 'fas fa-globe-europe',
+    imageUrl: 'images/malta-praktik.JPG',
     meta: 'Ascencia Malta, Erasmus+ work placement, 2026',
   },
 ];
@@ -158,7 +160,13 @@ export const projects = [
     technologies: ['Vue 3', 'Electron', 'Vite', 'Capacitor', 'LocalStorage'],
     githubUrl: 'https://github.com/Mykyta-G/Home-E',
     demoUrl: '',
-    imageUrl: '',
+    imageUrl: 'images/Home-E/homee-dashboard.png',
+    imageUrls: [
+      'images/Home-E/homee-dashboard.png',
+      'images/Home-E/homee-dashboard2.png',
+      'images/Home-E/homee-members.png',
+      'images/Home-E/homee-profile.png',
+    ],
     icon: 'fas fa-house-laptop',
   },
   {
