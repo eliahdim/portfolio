@@ -32,6 +32,27 @@
     />
   </head>
   <body>
+    <script>
+      (() => {
+        const storageKey = 'eliah-portfolio-language';
+        let language = 'en';
+
+        try {
+          const storedLanguage = window.localStorage.getItem(storageKey);
+          if (storedLanguage === 'sv' || storedLanguage === 'en') {
+            language = storedLanguage;
+          } else {
+            const browserLanguage = navigator.languages?.[0] || navigator.language || 'en';
+            language = browserLanguage.toLowerCase().startsWith('sv') ? 'sv' : 'en';
+          }
+        } catch {
+          language = (navigator.language || 'en').toLowerCase().startsWith('sv') ? 'sv' : 'en';
+        }
+
+        document.documentElement.lang = language;
+        document.documentElement.dataset.language = language;
+      })();
+    </script>
     <div id="root">
       <main class="app-error">
         <h1>Loading Eliah Dimmed portfolio...</h1>

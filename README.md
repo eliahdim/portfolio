@@ -9,6 +9,7 @@ The site presents Eliah as a junior IT support / IT technician candidate with ha
 - React
 - Vite
 - CSS
+- Built-in Swedish/English localization
 - Formspree contact form
 - GitHub Pages deployment
 
@@ -73,6 +74,23 @@ Update this file to change:
 - Project cards and modal descriptions
 - Contact links
 - The initial project selection and expanded project list
+- Swedish and English interface copy
+
+## Languages
+
+The portfolio supports Swedish and English without an external i18n dependency. On the first visit, `navigator.languages` selects Swedish for a Swedish browser and English otherwise. A manual SV/EN choice is saved in local storage and takes priority on later visits.
+
+Translation content lives in:
+
+```text
+src/data/translations.js
+```
+
+Language detection and persistence live in:
+
+```text
+src/hooks/useLanguage.js
+```
 
 Images live in:
 

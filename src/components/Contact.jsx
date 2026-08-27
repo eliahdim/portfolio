@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SectionHeader from './SectionHeader.jsx';
-import { contacts, profile } from '../data/siteData.js';
 
 const initialForm = {
   name: '',
@@ -8,10 +7,17 @@ const initialForm = {
   message: '',
 };
 
-export default function Contact() {
+export default function Contact({ contacts, profile, copy }) {
   const [form, setForm] = useState(initialForm);
-  const [status, setStatus] = useState({ type: 'idle', message: '' });
+  const [status, setStatus] = useState({ type: 'idle' });
   const isSubmitting = status.type === 'loading';
+
+  const statusMessage = {
+    idle: '',
+    loading: copy.loadingMessage,
+    success: copy.successMessage,
+    error: copy.errorMessage,
+  }[status.type];
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -20,7 +26,7 @@ export default function Contact() {
 
   async function handleSubmit(event) {
     event.preventDefault();
-    setStatus({ type: 'loading', message: 'Sending your message...' });
+    setStatus({ type: 'loading' });
 
     try {
       const formData = new FormData(event.currentTarget);
@@ -31,18 +37,13 @@ export default function Contact() {
       });
 
       if (!response.ok) {
-        const data = await response.json().catch(() => null);
-        const message = data?.errors?.map((error) => error.message).join(', ') || 'Submission failed.';
-        throw new Error(message);
+        throw new Error('Submission failed.');
       }
 
       setForm(initialForm);
-      setStatus({ type: 'success', message: 'Message sent. I will get back to you soon.' });
-    } catch (error) {
-      setStatus({
-        type: 'error',
-        message: error.message || 'Could not send the message. Please email me directly instead.',
-      });
+      setStatus({ type: 'success' });
+    } catch {
+      setStatus({ type: 'error' });
     }
   }
 
@@ -51,17 +52,17 @@ export default function Contact() {
       <div className="container">
         <SectionHeader
           id="contact-title"
-          title="Get In Touch"
-          subtitle="Open to junior IT support, onsite IT, and technical service opportunities"
+          title={copy.title}
+          subtitle={copy.subtitle}
         />
 
         <div className="contact-content">
-          <div className="contact-info" aria-label="Contact links">
+          <div className="contact-info" aria-label={copy.linksLabel}>
             <a href={profile.cvUrl} className="contact-item contact-item-featured reveal" download>
               <i className="fas fa-file-arrow-down" aria-hidden="true" />
               <span>
                 <strong>CV</strong>
-                <span>Download my resume as PDF</span>
+                <span>{copy.downloadResume}</span>
               </span>
             </a>
 
@@ -84,7 +85,7 @@ export default function Contact() {
 
           <form className="contact-form reveal" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Your name</label>
+              <label htmlFor="name">{copy.nameLabel}</label>
               <input
                 type="text"
                 id="name"
@@ -96,7 +97,7 @@ export default function Contact() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="email">Your email</label>
+              <label htmlFor="email">{copy.emailLabel}</label>
               <input
                 type="email"
                 id="email"
@@ -108,7 +109,7 @@ export default function Contact() {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="message">Message</label>
+              <label htmlFor="message">{copy.messageLabel}</label>
               <textarea
                 id="message"
                 name="message"
@@ -123,18 +124,18 @@ export default function Contact() {
               {isSubmitting ? (
                 <>
                   <i className="fas fa-spinner fa-spin" aria-hidden="true" />
-                  <span>Sending...</span>
+                  <span>{copy.sending}</span>
                 </>
               ) : (
                 <>
-                  <span>Send Message</span>
+                  <span>{copy.send}</span>
                   <i className="fas fa-paper-plane" aria-hidden="true" />
                 </>
               )}
             </button>
 
             <div className={`form-status form-status-${status.type}`} role="status" aria-live="polite">
-              {status.message}
+              {statusMessage}
             </div>
           </form>
         </div>

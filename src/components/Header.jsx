@@ -1,17 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useActiveSection } from '../hooks/useActiveSection.js';
 
-const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
-];
-
-export default function Header() {
+export default function Header({ language, onLanguageChange, copy }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const sectionIds = useMemo(() => navItems.map((item) => item.id), []);
+  const sectionIds = useMemo(() => copy.navItems.map((item) => item.id), [copy.navItems]);
   const activeSection = useActiveSection(sectionIds);
 
   useEffect(() => {
@@ -35,38 +28,64 @@ export default function Header() {
 
   return (
     <header className={`header${isScrolled ? ' scrolled' : ''}`}>
-      <nav className="nav" aria-label="Primary navigation">
+      <nav className="nav" aria-label={copy.navigationLabel}>
         <div className="nav-container">
-          <a className="nav-logo" href="#home" onClick={handleNavClick} aria-label="Eliah Dimmed home">
+          <a className="nav-logo" href="#home" onClick={handleNavClick} aria-label={copy.logoLabel}>
             E.D
           </a>
 
-          <ul className={`nav-menu${menuOpen ? ' active' : ''}`} id="primary-navigation">
-            {navItems.map((item) => (
-              <li key={item.id}>
-                <a
-                  href={`#${item.id}`}
-                  className={`nav-link${activeSection === item.id ? ' active' : ''}`}
-                  onClick={handleNavClick}
-                >
-                  {item.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <div className="nav-controls">
+            <ul className={`nav-menu${menuOpen ? ' active' : ''}`} id="primary-navigation">
+              {copy.navItems.map((item) => (
+                <li key={item.id}>
+                  <a
+                    href={`#${item.id}`}
+                    className={`nav-link${activeSection === item.id ? ' active' : ''}`}
+                    onClick={handleNavClick}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
 
-          <button
-            className={`nav-toggle${menuOpen ? ' active' : ''}`}
-            type="button"
-            aria-label={menuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={menuOpen}
-            aria-controls="primary-navigation"
-            onClick={() => setMenuOpen((open) => !open)}
-          >
-            <span className="bar" aria-hidden="true" />
-            <span className="bar" aria-hidden="true" />
-            <span className="bar" aria-hidden="true" />
-          </button>
+            <div className="language-switch" role="group" aria-label={copy.languageLabel}>
+              <button
+                type="button"
+                className={`language-option${language === 'sv' ? ' active' : ''}`}
+                aria-pressed={language === 'sv'}
+                aria-label={copy.swedishLabel}
+                lang="sv"
+                onClick={() => onLanguageChange('sv')}
+              >
+                SV
+              </button>
+              <span className="language-divider" aria-hidden="true" />
+              <button
+                type="button"
+                className={`language-option${language === 'en' ? ' active' : ''}`}
+                aria-pressed={language === 'en'}
+                aria-label={copy.englishLabel}
+                lang="en"
+                onClick={() => onLanguageChange('en')}
+              >
+                EN
+              </button>
+            </div>
+
+            <button
+              className={`nav-toggle${menuOpen ? ' active' : ''}`}
+              type="button"
+              aria-label={menuOpen ? copy.closeMenu : copy.openMenu}
+              aria-expanded={menuOpen}
+              aria-controls="primary-navigation"
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              <span className="bar" aria-hidden="true" />
+              <span className="bar" aria-hidden="true" />
+              <span className="bar" aria-hidden="true" />
+            </button>
+          </div>
         </div>
       </nav>
     </header>

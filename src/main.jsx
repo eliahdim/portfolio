@@ -15,9 +15,14 @@ class AppErrorBoundary extends React.Component {
 
   render() {
     if (this.state.error) {
+      const isSwedish = document.documentElement.lang === 'sv';
       return (
         <main className="app-error" role="alert">
-          <h1>Something went wrong while loading the portfolio.</h1>
+          <h1>
+            {isSwedish
+              ? 'Något gick fel när portfolion skulle laddas.'
+              : 'Something went wrong while loading the portfolio.'}
+          </h1>
           <p>{this.state.error.message}</p>
         </main>
       );

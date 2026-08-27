@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-export default function ProjectModal({ project, onClose }) {
+export default function ProjectModal({ project, onClose, copy }) {
   const dialogRef = useRef(null);
   const closeButtonRef = useRef(null);
 
@@ -49,7 +49,7 @@ export default function ProjectModal({ project, onClose }) {
       <button
         className="modal-overlay"
         type="button"
-        aria-label="Close project details"
+        aria-label={copy.closeLabel}
         onClick={onClose}
       />
       <article
@@ -63,7 +63,7 @@ export default function ProjectModal({ project, onClose }) {
         <button
           className="modal-close"
           type="button"
-          aria-label="Close project details"
+          aria-label={copy.closeLabel}
           onClick={onClose}
           ref={closeButtonRef}
         >
@@ -85,7 +85,10 @@ export default function ProjectModal({ project, onClose }) {
             </p>
             <p className="modal-outcome">{project.outcome}</p>
 
-            <ul className="modal-tech-stack" aria-label={`${project.title} technologies`}>
+            <ul
+              className="modal-tech-stack"
+              aria-label={`${project.title} ${copy.technologiesSuffix}`}
+            >
               {project.technologies.map((tech) => (
                 <li className="tech-pill" key={tech}>
                   {tech}
@@ -102,7 +105,7 @@ export default function ProjectModal({ project, onClose }) {
                   className="btn btn-primary"
                 >
                   <i className="fab fa-github" aria-hidden="true" />
-                  <span>View GitHub</span>
+                  <span>{copy.viewGithub}</span>
                 </a>
               ) : null}
               {project.demoUrl ? (
@@ -113,7 +116,7 @@ export default function ProjectModal({ project, onClose }) {
                   className="btn btn-secondary"
                 >
                   <i className="fas fa-external-link-alt" aria-hidden="true" />
-                  <span>Live Demo</span>
+                  <span>{copy.liveDemo}</span>
                 </a>
               ) : null}
             </div>

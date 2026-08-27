@@ -7,11 +7,29 @@ import Contact from './components/Contact.jsx';
 import Footer from './components/Footer.jsx';
 import ProjectModal from './components/ProjectModal.jsx';
 import JungleCanvas from './components/JungleCanvas.jsx';
-import { projects } from './data/siteData.js';
+import { getSiteData } from './data/translations.js';
+import { useLanguage } from './hooks/useLanguage.js';
 
 export default function App() {
-  const [selectedProject, setSelectedProject] = useState(null);
+  const { language, setLanguage } = useLanguage();
+  const siteData = getSiteData(language);
+  const [selectedProjectId, setSelectedProjectId] = useState(null);
   const lastFocusedElement = useRef(null);
+  const selectedProject = siteData.projects.find((project) => project.id === selectedProjectId) || null;
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+    document.documentElement.dataset.language = language;
+    document.title = siteData.meta.title;
+
+    const description = document.querySelector('meta[name="description"]');
+    const openGraphTitle = document.querySelector('meta[property="og:title"]');
+    const openGraphDescription = document.querySelector('meta[property="og:description"]');
+
+    description?.setAttribute('content', siteData.meta.description);
+    openGraphTitle?.setAttribute('content', siteData.meta.title);
+    openGraphDescription?.setAttribute('content', siteData.meta.socialDescription);
+  }, [language, siteData]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -28,30 +46,44 @@ export default function App() {
 
     document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
     return () => observer.disconnect();
-  }, []);
+  }, [language]);
 
   function openProject(project, triggerElement) {
     lastFocusedElement.current = triggerElement || document.activeElement;
-    setSelectedProject(project);
+    setSelectedProjectId(project.id);
   }
 
   function closeProject() {
-    setSelectedProject(null);
+    setSelectedProjectId(null);
     requestAnimationFrame(() => lastFocusedElement.current?.focus?.());
   }
 
   return (
     <>
       <JungleCanvas />
-      <Header />
+      <Header language={language} onLanguageChange={setLanguage} copy={siteData.ui.header} />
       <main>
-        <Hero />
-        <About />
-        <Projects projects={projects} onOpenProject={openProject} />
-        <Contact />
+        <Hero profile={siteData.profile} stats={siteData.stats} copy={siteData.ui.hero} />
+        <About
+          profile={siteData.profile}
+          journey={siteData.journey}
+          skills={siteData.skills}
+          infoCards={siteData.infoCards}
+          copy={siteData.ui.about}
+        />
+        <Projects
+          projects={siteData.projects}
+          onOpenProject={openProject}
+          copy={siteData.ui.projects}
+        />
+        <Contact
+          contacts={siteData.contacts}
+          profile={siteData.profile}
+          copy={siteData.ui.contact}
+        />
       </main>
-      <Footer />
-      <ProjectModal project={selectedProject} onClose={closeProject} />
+      <Footer profile={siteData.profile} copy={siteData.ui.footer} />
+      <ProjectModal project={selectedProject} onClose={closeProject} copy={siteData.ui.modal} />
     </>
   );
 }

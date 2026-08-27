@@ -1,7 +1,6 @@
 import React from 'react';
-import { profile, stats } from '../data/siteData.js';
 
-export default function Hero() {
+export default function Hero({ profile, stats, copy }) {
   return (
     <section id="home" className="hero" aria-labelledby="hero-title">
       <div className="hero-canopy" aria-hidden="true" />
@@ -14,7 +13,7 @@ export default function Hero() {
           </h1>
           <p className="hero-tagline">{profile.tagline}</p>
 
-          <dl className="hero-stats" aria-label="Portfolio highlights">
+          <dl className="hero-stats" aria-label={copy.statsLabel}>
             {stats.map((stat) => (
               <div className="stat-item" key={stat.label}>
                 <dt className="stat-label">{stat.label}</dt>
@@ -25,27 +24,27 @@ export default function Hero() {
 
           <div className="hero-buttons">
             <a href="#projects" className="btn btn-primary">
-              <span>View Projects</span>
+              <span>{copy.viewProjects}</span>
               <i className="fas fa-arrow-right" aria-hidden="true" />
             </a>
             <a href="#contact" className="btn btn-secondary">
-              <span>Contact Me</span>
+              <span>{copy.contactMe}</span>
               <i className="fas fa-envelope" aria-hidden="true" />
             </a>
             <a href={profile.cvUrl} className="btn btn-secondary" download>
-              <span>Download CV</span>
+              <span>{copy.downloadCv}</span>
               <i className="fas fa-file-arrow-down" aria-hidden="true" />
             </a>
           </div>
 
-          <div className="hero-profile-links" aria-label="Professional profiles">
-            <span className="hero-profile-label">Profiles</span>
+          <div className="hero-profile-links" aria-label={copy.profilesLabel}>
+            <span className="hero-profile-label">{copy.profiles}</span>
             <a
               href={profile.github}
               className="hero-profile-link"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Eliah Dimmed's GitHub profile"
+              aria-label={copy.githubLabel}
             >
               <i className="fab fa-github" aria-hidden="true" />
               <span>GitHub</span>
@@ -55,7 +54,7 @@ export default function Hero() {
               className="hero-profile-link"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Open Eliah Dimmed's LinkedIn profile"
+              aria-label={copy.linkedinLabel}
             >
               <i className="fab fa-linkedin" aria-hidden="true" />
               <span>LinkedIn</span>
@@ -67,7 +66,7 @@ export default function Hero() {
           <div className="hero-image">
             <img
               src="images/eliahdimmed.jpg"
-              alt="Portrait of Eliah Dimmed"
+              alt={copy.portraitAlt}
               className="profile-photo"
               width="800"
               height="800"
@@ -77,8 +76,8 @@ export default function Hero() {
         </div>
       </div>
 
-      <a className="scroll-indicator" href="#about" aria-label="Scroll to about section">
-        <span>Explore</span>
+      <a className="scroll-indicator" href="#about" aria-label={copy.exploreLabel}>
+        <span>{copy.explore}</span>
         <span className="mouse" aria-hidden="true">
           <span className="wheel" />
         </span>

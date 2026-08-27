@@ -1,11 +1,10 @@
 import React from 'react';
-import { profile } from '../data/siteData.js';
 
-export default function Footer() {
+export default function Footer({ profile, copy }) {
   return (
     <footer className="footer">
       <div className="container">
-        <p>&copy; 2026 {profile.fullName}. Built with React and Vite.</p>
+        <p>&copy; 2026 {profile.fullName}. {copy.builtWith}</p>
       </div>
     </footer>
   );

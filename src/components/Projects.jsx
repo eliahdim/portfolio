@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SectionHeader from './SectionHeader.jsx';
 
-export default function Projects({ projects, onOpenProject }) {
+export default function Projects({ projects, onOpenProject, copy }) {
   const initiallyVisible = 6;
   const [showAll, setShowAll] = useState(false);
   const visibleProjects = showAll ? projects : projects.slice(0, initiallyVisible);
@@ -13,13 +13,18 @@ export default function Projects({ projects, onOpenProject }) {
       <div className="container">
         <SectionHeader
           id="projects-title"
-          title="Selected Projects"
-          subtitle="Selected work showing how I approach systems, automation, teamwork, and practical technical problems"
+          title={copy.title}
+          subtitle={copy.subtitle}
         />
 
         <div className="projects-grid" id="projects-grid">
           {visibleProjects.map((project) => (
-            <ProjectCard project={project} onOpenProject={onOpenProject} key={project.id} />
+            <ProjectCard
+              project={project}
+              onOpenProject={onOpenProject}
+              copy={copy}
+              key={project.id}
+            />
           ))}
         </div>
 
@@ -32,7 +37,7 @@ export default function Projects({ projects, onOpenProject }) {
               aria-controls="projects-grid"
               onClick={() => setShowAll((current) => !current)}
             >
-              <span>{showAll ? 'Show fewer projects' : 'Show more projects'}</span>
+              <span>{showAll ? copy.showFewer : copy.showMore}</span>
               <i className={`fas fa-chevron-${showAll ? 'up' : 'down'}`} aria-hidden="true" />
             </button>
           </div>
@@ -42,7 +47,7 @@ export default function Projects({ projects, onOpenProject }) {
   );
 }
 
-function ProjectCard({ project, onOpenProject }) {
+function ProjectCard({ project, onOpenProject, copy }) {
   const hasGithub = Boolean(project.githubUrl);
   const hasDemo = Boolean(project.demoUrl);
 
@@ -52,10 +57,14 @@ function ProjectCard({ project, onOpenProject }) {
 
   return (
     <article className={`project-card reveal${project.featured ? ' featured' : ''}`}>
-      {project.featured ? <span className="project-badge">Featured</span> : null}
+      {project.featured ? <span className="project-badge">{copy.featured}</span> : null}
       <div className="project-image">
         {project.imageUrl ? (
-          <img src={project.imageUrl} alt={`${project.title} screenshot`} loading="lazy" />
+          <img
+            src={project.imageUrl}
+            alt={`${project.title} ${copy.screenshotSuffix}`}
+            loading="lazy"
+          />
         ) : (
           <i className={project.icon || 'fas fa-code'} aria-hidden="true" />
         )}
@@ -66,7 +75,7 @@ function ProjectCard({ project, onOpenProject }) {
         <h3 className="project-title">{project.title}</h3>
         <p className="project-description">{project.summary}</p>
 
-        <ul className="project-tech" aria-label={`${project.title} technologies`}>
+        <ul className="project-tech" aria-label={`${project.title} ${copy.technologiesSuffix}`}>
           {project.technologies.map((tech) => (
             <li className="tech-tag" key={tech}>
               {tech}
@@ -76,7 +85,7 @@ function ProjectCard({ project, onOpenProject }) {
 
         <div className="project-buttons">
           <button className="btn btn-small btn-primary" type="button" onClick={handleDetailsClick}>
-            <span>Details</span>
+            <span>{copy.details}</span>
             <i className="fas fa-arrow-right" aria-hidden="true" />
           </button>
           {hasGithub ? (
@@ -85,7 +94,7 @@ function ProjectCard({ project, onOpenProject }) {
               className="btn btn-small btn-secondary"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Open ${project.title} GitHub repository`}
+              aria-label={copy.githubLabel(project.title)}
             >
               <i className="fab fa-github" aria-hidden="true" />
               <span>GitHub</span>
@@ -97,10 +106,10 @@ function ProjectCard({ project, onOpenProject }) {
               className="btn btn-small btn-secondary"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={`Open ${project.title} live demo`}
+              aria-label={copy.demoLabel(project.title)}
             >
               <i className="fas fa-external-link-alt" aria-hidden="true" />
-              <span>Demo</span>
+              <span>{copy.demo}</span>
             </a>
           ) : null}
         </div>

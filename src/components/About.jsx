@@ -1,34 +1,33 @@
 import React from 'react';
 import SectionHeader from './SectionHeader.jsx';
-import { infoCards, journey, profile, skills } from '../data/siteData.js';
 
-export default function About() {
+export default function About({ profile, journey, skills, infoCards, copy }) {
   return (
     <section id="about" className="about" aria-labelledby="about-title">
       <div className="about-bg" aria-hidden="true" />
       <div className="container">
         <SectionHeader
           id="about-title"
-          title="About Me"
-          subtitle="A practical mix of software, support, and infrastructure"
+          title={copy.title}
+          subtitle={copy.subtitle}
         />
 
         <div className="about-content">
-          <JourneyTimeline />
-          <Skills />
-          <ProfessionalSummary />
-          <PersonalInfo />
+          <JourneyTimeline journey={journey} copy={copy} />
+          <Skills skills={skills} copy={copy} />
+          <ProfessionalSummary profile={profile} copy={copy} />
+          <PersonalInfo infoCards={infoCards} />
         </div>
       </div>
     </section>
   );
 }
 
-function JourneyTimeline() {
+function JourneyTimeline({ journey, copy }) {
   return (
     <div className="journey-section">
-      <h3 className="journey-title">My Journey</h3>
-      <ol className="journey-timeline" aria-label="Timeline">
+      <h3 className="journey-title">{copy.journeyTitle}</h3>
+      <ol className="journey-timeline" aria-label={copy.timelineLabel}>
         {journey.map((stage) => (
           <li className="journey-stage reveal" key={stage.title}>
             <span className="journey-stage-marker" aria-hidden="true" />
@@ -55,11 +54,11 @@ function JourneyTimeline() {
   );
 }
 
-function Skills() {
+function Skills({ skills, copy }) {
   return (
     <div className="skills-section">
-      <h3 className="skills-title">Skills & Technologies</h3>
-      <ul className="skills-grid" aria-label="Skills and technologies">
+      <h3 className="skills-title">{copy.skillsTitle}</h3>
+      <ul className="skills-grid" aria-label={copy.skillsLabel}>
         {skills.map((skill) => (
           <li className="skill-item reveal" key={skill.name}>
             <i className={skill.icon} aria-hidden="true" />
@@ -72,16 +71,16 @@ function Skills() {
   );
 }
 
-function ProfessionalSummary() {
+function ProfessionalSummary({ profile, copy }) {
   return (
     <article className="professional-summary reveal">
-      <h3 className="summary-title">Professional Profile</h3>
+      <h3 className="summary-title">{copy.profileTitle}</h3>
       <p className="summary-text">{profile.summary}</p>
     </article>
   );
 }
 
-function PersonalInfo() {
+function PersonalInfo({ infoCards }) {
   return (
     <div className="personal-info">
       {infoCards.map((item) => (
