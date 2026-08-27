@@ -1,74 +1,86 @@
 export const profile = {
   name: 'Eliah Dimmed',
   fullName: 'Eliah Bäckström Dimmed',
-  location: 'Hässleholm, Sweden',
+  location: 'Tyringe, Skåne, Sweden',
   email: 'eliah.dimmed@gmail.com',
   linkedin: 'https://www.linkedin.com/in/eliah-dimmed/',
   github: 'https://github.com/eliahdim',
   cvUrl: 'files/eliah-dimmed-cv.pdf',
-  badge: 'TE4 engineering student focused on software design',
-  role: 'Junior Web Developer / IT Technician',
+  badge: 'IT support & technical operations with a software engineering background',
+  role: 'Junior IT Support / IT Technician',
   tagline:
-    'I build practical web projects and bring hands-on infrastructure experience from fiber networks, customer support, and technical troubleshooting.',
+    'I solve technical problems where users, devices, and networks meet—combining hands-on infrastructure experience with the ability to understand and build software.',
   summary:
-    'Solution-oriented engineering student who bridges software development and physical IT infrastructure. I combine JavaScript, React, Python, and SQL fundamentals with practical field experience from fiber optics, customer support, and network stability work.',
+    'Solution-oriented TE4 graduate with hands-on experience in fiber infrastructure, customer-facing technical support, hardware, networks, and software development. I enjoy troubleshooting methodically, explaining solutions clearly, and taking responsibility until the user can work again. My development background in JavaScript, React, Python, and SQL also helps me understand systems beyond the surface and automate repetitive work.',
 };
 
 export const stats = [
-  { value: '1+', label: 'Year IT Field Experience' },
-  { value: '8', label: 'Core Technologies' },
-  { value: '7', label: 'Public Projects' },
+  { value: '1+', label: 'Year Hands-on IT Experience' },
+  { value: '2', label: 'Professional Work Placements' },
+  { value: '7', label: 'Selected Projects' },
 ];
 
 export const journey = [
   {
-    title: 'Technology Curiosity',
+    title: 'Technology Programme',
     description:
-      'Started exploring computers and games early, which grew into an interest in creating digital experiences instead of only using them.',
-    icon: 'fas fa-child',
-    imageUrl: 'images/eliah-kid.png',
-  },
-  {
-    title: 'Programming Foundations',
-    description:
-      'Began learning programming through school projects, game development, web experiments, and JavaScript certification work.',
+      'Built a broad technical foundation through programming, web development, networking, and a Unity-based graduation project.',
     icon: 'fas fa-laptop-code',
     imageUrl: 'images/eliah-teen.jpg',
+    meta: 'Hässleholms Tekniska Skola, 2021 - 2024',
   },
   {
     title: 'Fiber Technician',
     description:
-      'Worked with fiber network stability and customer-facing technical support, building a practical understanding of infrastructure, reliability, and troubleshooting.',
+      'Installed and troubleshot fiber infrastructure in two 23-storey residential buildings in Malmö. The work included fiber blowing and splicing, CAT6, media cabinets, routers, TV equipment, fault finding, and direct customer contact.',
     icon: 'fas fa-network-wired',
     imageUrl: 'images/eliah-fiber.jpg',
     meta: 'Baramontage, July 2024 - July 2025',
   },
   {
-    title: 'Graduate Engineer (TE4)',
+    title: 'Graduate Engineer in Software Design (TE4)',
     description:
-      'Currently studying software design, agile methods, and scalable architecture while building a stronger project portfolio for professional IT roles.',
+      'Completed a one-year engineering programme focused on software design, agile development, databases, APIs, architecture, teamwork, and delivering technical projects for real-world use cases.',
     icon: 'fas fa-user-graduate',
     imageUrl: 'images/eliahdimmed.jpg',
-    meta: 'NTI Gymnasiet Helsingborg, Aug 2025 - Present',
+    meta: 'NTI Gymnasiet Helsingborg, Aug 2025 - June 2026',
+  },
+  {
+    title: 'AI & E-commerce Development',
+    description:
+      'Created practical AI-assisted tools for e-commerce workflows, including CopyForge, ConversionLens, and CampaignForge. Worked independently in a remote environment with fast feedback and product-focused delivery.',
+    icon: 'fas fa-wand-magic-sparkles',
+    meta: 'ZYNQ Media Group, TE4 work placement, 2026',
+  },
+  {
+    title: 'International IT Work Placement',
+    description:
+      'Worked with website development, visual design, and planning for an internal school system covering attendance and scheduling. The placement strengthened my adaptability, communication, and ability to work in English in an international environment.',
+    icon: 'fas fa-globe-europe',
+    meta: 'Ascencia Malta, Erasmus+ work placement, 2026',
   },
 ];
 
 export const skills = [
-  { name: 'HTML5', icon: 'fab fa-html5' },
-  { name: 'CSS3', icon: 'fab fa-css3-alt' },
-  { name: 'JavaScript', detail: 'Certified', icon: 'fab fa-js-square' },
-  { name: 'React', icon: 'fab fa-react' },
-  { name: 'Python', icon: 'fab fa-python' },
-  { name: 'C#', icon: 'fa-solid fa-code' },
-  { name: 'SQL', icon: 'fas fa-database' },
-  { name: 'GitHub', icon: 'fab fa-github' },
+  { name: 'IT Support', detail: 'User-focused troubleshooting', icon: 'fas fa-headset' },
+  { name: 'Windows', detail: 'Client environments', icon: 'fab fa-windows' },
+  { name: 'Linux', detail: 'Desktop & command line', icon: 'fab fa-linux' },
+  { name: 'Networking', detail: 'TCP/IP, DNS & DHCP fundamentals', icon: 'fas fa-network-wired' },
+  { name: 'Fiber Optics', detail: 'Blowing, splicing & fault finding', icon: 'fas fa-ethernet' },
+  { name: 'Hardware', detail: 'Workstations & peripherals', icon: 'fas fa-desktop' },
+  { name: 'Customer Support', detail: 'Service & clear communication', icon: 'fas fa-users' },
+  { name: 'Microsoft 365', detail: 'Everyday user support', icon: 'fab fa-microsoft' },
+  { name: 'Technical Documentation', detail: 'Structured handovers & guides', icon: 'fas fa-file-lines' },
+  { name: 'JavaScript & React', detail: 'Frontend development', icon: 'fab fa-react' },
+  { name: 'Python', detail: 'Automation & AI workflows', icon: 'fab fa-python' },
+  { name: 'SQL', detail: 'Database fundamentals', icon: 'fas fa-database' },
 ];
 
 export const infoCards = [
-  { title: 'Location', value: 'Hässleholm, Sweden', icon: 'fas fa-map-marker-alt' },
+  { title: 'Location', value: 'Tyringe / Hässleholm, Skåne', icon: 'fas fa-map-marker-alt' },
   { title: 'Languages', value: 'Swedish, English', icon: 'fas fa-language' },
-  { title: 'Strengths', value: 'Structured, curious, fast learner', icon: 'fas fa-bolt' },
-  { title: 'Interests', value: 'Football, games, IT systems', icon: 'fas fa-heart' },
+  { title: 'Strengths', value: 'Troubleshooting, service, communication', icon: 'fas fa-bolt' },
+  { title: 'Career Focus', value: 'IT support, onsite IT, field service', icon: 'fas fa-briefcase' },
 ];
 
 export const projects = [
@@ -88,7 +100,24 @@ export const projects = [
     featured: true,
   },
   {
-    id: 5,
+    id: 2,
+    title: 'CampaignForge & CopyForge',
+    summary:
+      'AI-assisted e-commerce tools for turning product information into campaign assets, product copy, and channel-ready marketing content.',
+    role: 'Developer, ZYNQ Media Group work placement',
+    description:
+      'Developed several product-focused tools during my remote work placement. CopyForge transforms product images and titles into SEO copy, social content, advertisements, variations, and reusable brand-aware outputs. CampaignForge creates coordinated campaign concepts across email, social media, ads, and banners, with language, history, and section-level regeneration controls.',
+    outcome:
+      'Demonstrates independent delivery, fast iteration, prompt design, AI workflow integration, and the ability to translate real e-commerce needs into clear and usable software.',
+    technologies: ['JavaScript', 'AI workflows', 'Prompt design', 'E-commerce', 'UX'],
+    githubUrl: '',
+    demoUrl: '',
+    imageUrl: '',
+    icon: 'fas fa-wand-magic-sparkles',
+    featured: true,
+  },
+  {
+    id: 3,
     title: '1Percent',
     summary:
       'A full-stack goal visualization app for breaking large ambitions into interactive subgoal trees.',
@@ -118,7 +147,7 @@ export const projects = [
     imageUrl: 'images/ragazzi.png',
   },
   {
-    id: 6,
+    id: 5,
     title: 'Home-E',
     summary: 'A hackathon-built family hub app for organizing household tasks, meals, shopping, and activities.',
     role: 'Hackathon team project / developer',
@@ -133,7 +162,7 @@ export const projects = [
     icon: 'fas fa-house-laptop',
   },
   {
-    id: 3,
+    id: 6,
     title: 'Hypixel Skyblock Tracker',
     summary: 'A React API project for browsing and filtering Hypixel Skyblock item data.',
     role: 'TE4 school project / frontend developer',
@@ -148,21 +177,6 @@ export const projects = [
   },
   {
     id: 7,
-    title: 'Aiming for Disaster',
-    summary: 'A TE4 Unity game project built as part of a school team.',
-    role: 'TE4 team project / Unity developer',
-    description:
-      'A Unity game project from TE4. I am including it separately from my older exam work because it represents later game-development practice in a team environment, with a larger school-owned repository and Unity project structure.',
-    outcome:
-      'Useful for showing range beyond web development: C#, Unity workflows, teamwork, gameplay iteration, and working inside a larger project repository.',
-    technologies: ['Unity', 'C#', 'Game development', 'Team project'],
-    githubUrl: 'https://github.com/NTIG-Helsingborg/TE4_25-26_Aiming-for-Disaster',
-    demoUrl: '',
-    imageUrl: '',
-    icon: 'fas fa-crosshairs',
-  },
-  {
-    id: 2,
     title: 'Pootis Adventures',
     summary: 'A high school exam-work 2D platformer with four playable levels.',
     role: 'Game developer',

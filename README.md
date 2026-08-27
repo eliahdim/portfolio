@@ -2,7 +2,7 @@
 
 Personal portfolio for Eliah Dimmed, built with React and Vite.
 
-The site presents Eliah as a junior web developer / IT technician candidate with selected projects, a technical journey, skills, and contact options.
+The site presents Eliah as a junior IT support / IT technician candidate with hands-on infrastructure experience, a software engineering background, selected projects, and contact options.
 
 ## Tech Stack
 
@@ -72,6 +72,7 @@ Update this file to change:
 - Skills
 - Project cards and modal descriptions
 - Contact links
+- The initial project selection and expanded project list
 
 Images live in:
 
@@ -81,21 +82,15 @@ public/images/
 
 Use `images/file-name.ext` when referencing them from React data or components. Relative paths keep the site working on GitHub Pages project URLs.
 
-## Adding Your CV
+## CV
 
-Drop your PDF CV here:
+The downloadable CV is stored at:
 
 ```text
 public/files/eliah-dimmed-cv.pdf
 ```
 
-The hero and contact section already include `Download CV` links pointing to:
-
-```text
-files/eliah-dimmed-cv.pdf
-```
-
-If you want another filename later, update `cvUrl` in `src/data/siteData.js`.
+The hero and contact sections use `profile.cvUrl` from `src/data/siteData.js`.
 
 ## Accessibility and UX Notes
 

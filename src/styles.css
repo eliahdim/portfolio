@@ -774,6 +774,12 @@ section {
   gap: var(--spacing-xl);
 }
 
+.projects-toggle {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-2xl);
+}
+
 .project-card {
   position: relative;
   display: flex;

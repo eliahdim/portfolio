@@ -49,7 +49,11 @@ export default function Contact() {
   return (
     <section id="contact" className="contact" aria-labelledby="contact-title">
       <div className="container">
-        <SectionHeader id="contact-title" title="Get In Touch" />
+        <SectionHeader
+          id="contact-title"
+          title="Get In Touch"
+          subtitle="Open to junior IT support, onsite IT, and technical service opportunities"
+        />
 
         <div className="contact-content">
           <div className="contact-info" aria-label="Contact links">

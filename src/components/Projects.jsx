@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SectionHeader from './SectionHeader.jsx';
 
 export default function Projects({ projects, onOpenProject }) {
+  const initiallyVisible = 6;
+  const [showAll, setShowAll] = useState(false);
+  const visibleProjects = showAll ? projects : projects.slice(0, initiallyVisible);
+  const hasMoreProjects = projects.length > initiallyVisible;
+
   return (
     <section id="projects" className="projects" aria-labelledby="projects-title">
       <div className="projects-bg" aria-hidden="true" />
@@ -9,14 +14,29 @@ export default function Projects({ projects, onOpenProject }) {
         <SectionHeader
           id="projects-title"
           title="Selected Projects"
-          subtitle="Practical work across web development, automation, and technical problem solving"
+          subtitle="Selected work showing how I approach systems, automation, teamwork, and practical technical problems"
         />
 
-        <div className="projects-grid">
-          {projects.map((project) => (
+        <div className="projects-grid" id="projects-grid">
+          {visibleProjects.map((project) => (
             <ProjectCard project={project} onOpenProject={onOpenProject} key={project.id} />
           ))}
         </div>
+
+        {hasMoreProjects ? (
+          <div className="projects-toggle">
+            <button
+              className="btn btn-secondary"
+              type="button"
+              aria-expanded={showAll}
+              aria-controls="projects-grid"
+              onClick={() => setShowAll((current) => !current)}
+            >
+              <span>{showAll ? 'Show fewer projects' : 'Show more projects'}</span>
+              <i className={`fas fa-chevron-${showAll ? 'up' : 'down'}`} aria-hidden="true" />
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   );
